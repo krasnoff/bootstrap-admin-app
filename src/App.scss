@@ -1,5 +1,36 @@
 .sidebar {
   min-height: 100vh;
+  color: #fff;
+
+  .sidebar-brand {
+    height: 4.375rem;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 800;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: .05rem;
+    z-index: 1;
+
+    .sidebar-brand-text {
+      display: inline;
+    }
+
+    .sidebar-brand-icon {
+      font-size: 2rem;
+    }
+
+    .rotate-n-15 {
+      transform: rotate(-15deg);
+    }
+  }
+
+  
+
+  .mx-3 {
+    margin-left: 1rem!important;
+  }
 }
 
 .bg-gradient-primary {
@@ -9,5 +40,9 @@
 @media (min-width: 768px) {
   .sidebar {
     width: 14rem !important;
+
+    .sidebar-brand-text {
+      display: inline;
+    }
   }
 }
