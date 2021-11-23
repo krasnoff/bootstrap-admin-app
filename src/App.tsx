@@ -1,14 +1,15 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import './App.scss';
-import { faLaughWink } from '@fortawesome/free-solid-svg-icons'
 import Nav from './components/Navigator/navigator';
 
 function App() {
   return (
+    <Router>
     <div id="wrapper">
       <Nav></Nav>
     </div>
+    </Router>
   );
 }
 
