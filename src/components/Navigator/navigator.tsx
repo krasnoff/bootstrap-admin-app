@@ -4,6 +4,7 @@ import { faChartArea, faCog, faLaughWink } from '@fortawesome/free-solid-svg-ico
 import SubMenuItem from '../../Types/Navigator/SubMenuItem';
 import SubMenuItemObj from './Submenu/subMenu';
 import { SingleItem } from '../../Types/Navigator/SingleItem';
+import MainMenuItem from '../../Types/Navigator/MainMenuItem';
 
 function Nav() {
     const subMenuOne: SubMenuItem = {
@@ -16,6 +17,12 @@ function Nav() {
             url: 'ggggg'
         }]
     }
+
+    const MenuItems: Array<MainMenuItem> = [{
+        title: 'Charts',
+        url: '/charts',
+        iconDefinition: faLaughWink
+    }];
 
     const handleItemClick = (evt: any, el: SingleItem) => {
         console.log('outer frame...', evt, el);

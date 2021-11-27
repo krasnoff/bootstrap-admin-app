@@ -1,0 +1,26 @@
+.navItem {
+    position: relative;
+
+    .navLink {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 1rem;
+      width: 14rem;
+      color: rgba(255,255,255,.8);
+      text-decoration: none;
+      cursor: pointer;
+
+      span {
+        font-size: 0.85rem;
+      }
+
+      &:active, &:hover {
+        color: #fff;
+      }
+
+      .fontIcon {
+        margin-right: 0.25rem;
+      }
+    }   
+}
