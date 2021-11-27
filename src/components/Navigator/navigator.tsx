@@ -3,6 +3,7 @@ import styles from './navigator.module.scss'; // Import css modules stylesheet a
 import { faChartArea, faCog, faLaughWink } from '@fortawesome/free-solid-svg-icons'
 import SubMenuItem from '../../Types/Navigator/SubMenuItem';
 import SubMenuItemObj from './Submenu/subMenu';
+import { SingleItem } from '../../Types/Navigator/SingleItem';
 
 function Nav() {
     const subMenuOne: SubMenuItem = {
@@ -12,12 +13,12 @@ function Nav() {
             url: 'fffff'
         },{
             title: 'sub menu 2',
-            url: 'fffff'
+            url: 'ggggg'
         }]
     }
 
-    const handleItemClick = async (evt: any, id: string) => {
-        console.log(evt, id);
+    const handleItemClick = (evt: any, el: SingleItem) => {
+        console.log('outer frame...', evt, el);
         // this.props.history.push('/' + id.toLowerCase());
     }
     
