@@ -5,6 +5,7 @@ import SubMenuItem from '../../Types/Navigator/SubMenuItem';
 import SubMenuItemObj from './Submenu/subMenu';
 import { SingleItem } from '../../Types/Navigator/SingleItem';
 import MainMenuItem from '../../Types/Navigator/MainMenuItem';
+import MenuItemObj from './MenuItem/menuItem';
 
 function Nav() {
     const subMenuOne: SubMenuItem = {
@@ -20,8 +21,12 @@ function Nav() {
 
     const MenuItems: Array<MainMenuItem> = [{
         title: 'Charts',
-        url: '/charts',
-        iconDefinition: faLaughWink
+        url: 'charts',
+        iconDefinition: faChartArea
+    },{
+        title: 'Component',
+        iconDefinition: faCog,
+        subMenuItem: subMenuOne
     }];
 
     const handleItemClick = (evt: any, el: SingleItem) => {
@@ -40,11 +45,6 @@ function Nav() {
         <div className={styles.sidebarHeading}>Interface</div>
         <li className={styles.navItem}>
             <a className={styles.navLink}>
-                <FontAwesomeIcon icon={faChartArea} className={styles.fontIcon} />
-                <span>Charts</span></a>
-        </li>
-        <li className={styles.navItem}>
-            <a className={styles.navLink}>
                 <FontAwesomeIcon icon={faCog} className={styles.fontIcon} />
                 <span>Components</span></a>
             <div id="collapseTwo" className={styles.collapse} aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -61,6 +61,8 @@ function Nav() {
                 <span>Components</span></a>
             <SubMenuItemObj subItems={subMenuOne} handleItemClick={handleItemClick}></SubMenuItemObj>
         </li>
+        <MenuItemObj handleItemClick={handleItemClick} mainMenuItem={MenuItems[0]}></MenuItemObj>
+        <MenuItemObj handleItemClick={handleItemClick} mainMenuItem={MenuItems[1]}></MenuItemObj>
     </ul>);
 }
 

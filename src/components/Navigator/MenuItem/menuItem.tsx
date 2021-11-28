@@ -1,5 +1,6 @@
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 import MainMenuItem from '../../../Types/Navigator/MainMenuItem';
 import { SingleItem } from '../../../Types/Navigator/SingleItem';
 import SubMenuItem from '../../../Types/Navigator/SubMenuItem';
@@ -12,10 +13,23 @@ interface MyProps {
 }
 
 function MenuItemObj(props: MyProps): JSX.Element {
+    const handleClick = () => {
+        alert('click!!!!!')
+    }
+    
     return (<li className={styles.navItem}>
-        <a className={styles.navLink}>
-            <FontAwesomeIcon icon={props.mainMenuItem.iconDefinition} className={styles.fontIcon} />
-            <span>{props.mainMenuItem.title}</span></a>
+        {props.mainMenuItem.url ? 
+            <Link className={styles.navLink} to={'/' + props.mainMenuItem.url.toLowerCase()}>
+                <FontAwesomeIcon icon={props.mainMenuItem.iconDefinition} className={styles.fontIcon} />
+                <span>{props.mainMenuItem.title}</span>
+            </Link>
+        : null}
+        {!props.mainMenuItem.url ? 
+            <span className={styles.navLink} onClick={() => handleClick()}>
+                <FontAwesomeIcon icon={props.mainMenuItem.iconDefinition} className={styles.fontIcon} />
+                <span>{props.mainMenuItem.title}</span>
+            </span>
+        : null}
         {props.mainMenuItem.subMenuItem ? 
             <SubMenuItemObj subItems={props.mainMenuItem.subMenuItem} handleItemClick={props.handleItemClick}></SubMenuItemObj>
         : null}
