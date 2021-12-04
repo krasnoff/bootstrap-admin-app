@@ -6,6 +6,8 @@
     -webkit-animation: none;
     animation: none;
     margin: 0 1rem;
+    display: none;
+    transition: opacity 1s ease-out;
 
     .collapseInner {
       padding: 0.5rem 0;
@@ -36,4 +38,8 @@
         white-space: nowrap;
       }
     }
+}
+
+.show {
+  display: block;
 }

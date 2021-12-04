@@ -1,5 +1,6 @@
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import MainMenuItem from '../../../Types/Navigator/MainMenuItem';
 import { SingleItem } from '../../../Types/Navigator/SingleItem';
@@ -13,8 +14,10 @@ interface MyProps {
 }
 
 function MenuItemObj(props: MyProps): JSX.Element {
+    const [expanded, setExpanded] = useState(false);
+
     const handleClick = () => {
-        alert('click!!!!!')
+        setExpanded(!expanded);
     }
     
     return (<li className={styles.navItem}>
@@ -30,8 +33,8 @@ function MenuItemObj(props: MyProps): JSX.Element {
                 <span>{props.mainMenuItem.title}</span>
             </span>
         : null}
-        {props.mainMenuItem.subMenuItem ? 
-            <SubMenuItemObj subItems={props.mainMenuItem.subMenuItem} handleItemClick={props.handleItemClick}></SubMenuItemObj>
+        {(props.mainMenuItem.subMenuItem) ? 
+            <SubMenuItemObj subItems={props.mainMenuItem.subMenuItem} handleItemClick={props.handleItemClick} isExpand={expanded}></SubMenuItemObj>
         : null}
     </li>);
 }

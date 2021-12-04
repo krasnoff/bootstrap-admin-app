@@ -55,12 +55,6 @@ function Nav() {
                 </div>
             </div>
         </li>
-        <li className={styles.navItem}>
-            <a className={styles.navLink}>
-                <FontAwesomeIcon icon={faCog} className={styles.fontIcon} />
-                <span>Components</span></a>
-            <SubMenuItemObj subItems={subMenuOne} handleItemClick={handleItemClick}></SubMenuItemObj>
-        </li>
         <MenuItemObj handleItemClick={handleItemClick} mainMenuItem={MenuItems[0]}></MenuItemObj>
         <MenuItemObj handleItemClick={handleItemClick} mainMenuItem={MenuItems[1]}></MenuItemObj>
     </ul>);

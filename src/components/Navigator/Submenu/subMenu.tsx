@@ -5,12 +5,13 @@ import { SingleItem } from '../../../Types/Navigator/SingleItem';
 
 interface MyProps {
     subItems: SubMenuItem,
-    handleItemClick: ((event: React.MouseEvent<HTMLDivElement, MouseEvent>, el: SingleItem) => void)
+    handleItemClick: ((event: React.MouseEvent<HTMLDivElement, MouseEvent>, el: SingleItem) => void),
+    isExpand: boolean
 }
 
 function SubMenuItemObj(props: MyProps): JSX.Element {
     return (
-        <div id="collapseTwo" className={styles.collapse} aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseTwo" className={[styles.collapse, props.isExpand ? styles.show : null].join(' ')} aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div className={styles.collapseInner}>
                 <h6 className={styles.collapseHeader}>{props.subItems.title}:</h6>
                 {props.subItems.items.map((el, index) => 
