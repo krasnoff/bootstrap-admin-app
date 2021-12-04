@@ -1,10 +1,8 @@
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import MainMenuItem from '../../../Types/Navigator/MainMenuItem';
 import { SingleItem } from '../../../Types/Navigator/SingleItem';
-import SubMenuItem from '../../../Types/Navigator/SubMenuItem';
 import SubMenuItemObj from '../Submenu/subMenu';
 import styles from './menuItem.module.scss'; // Import css modules stylesheet as styles
 
