@@ -1,15 +1,35 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './navigator.module.scss'; // Import css modules stylesheet as styles
-import { faChartArea, faCog, faLaughWink } from '@fortawesome/free-solid-svg-icons'
+import { faChartArea, faCog, faLaughWink, faTachometerAlt } from '@fortawesome/free-solid-svg-icons'
 import { SingleItem } from '../../Types/Navigator/SingleItem';
 import MainMenuItem from '../../Types/Navigator/MainMenuItem';
 import MenuItemObj from './MenuItem/menuItem';
+import { MenuTypes } from '../../Types/Navigator/MenuTypes';
+import Seperator from './Seperator/seperator';
+import SubHeader from './SubHeader/subHeader';
 
 function Nav() {
-    const MenuItems: Array<MainMenuItem> = [{
+    const MenuItems: Array<MainMenuItem> = [
+    {
+        iconDefinition: faTachometerAlt,
+        menuType: MenuTypes.Seperator
+    },{
+        title: 'Dashboard',
+        url: 'dashboard',
+        iconDefinition: faTachometerAlt,
+        menuType: MenuTypes.MenuItem
+    },{
+        iconDefinition: faTachometerAlt,
+        menuType: MenuTypes.Seperator
+    },{
+        iconDefinition: faTachometerAlt,
+        menuType: MenuTypes.SubHeader,
+        title: 'Other Things'
+    },{
         title: 'Charts',
         url: 'charts',
-        iconDefinition: faChartArea
+        iconDefinition: faChartArea,
+        menuType: MenuTypes.MenuItem
     },{
         title: 'Component',
         iconDefinition: faCog,
@@ -22,11 +42,25 @@ function Nav() {
                 title: 'sub menu 2',
                 url: 'ggggg'
             }]
-        }
+        },
+        menuType: MenuTypes.MenuItem
     }];
 
     const handleItemClick = (evt: any, el: SingleItem) => {
         console.log('outer frame...', evt, el);
+    }
+
+    const renderSwitch = (param: MainMenuItem, index: number) => {
+        switch(param.menuType) {
+            case MenuTypes.MenuItem:
+                return <MenuItemObj handleItemClick={handleItemClick} mainMenuItem={param} key={index}></MenuItemObj>;
+            case MenuTypes.Seperator:
+                return <Seperator key={index}></Seperator>;
+            case MenuTypes.SubHeader:
+                return <SubHeader mainMenuItem={param} key={index}></SubHeader>;
+            default:
+                return null;
+        }
     }
     
     return (<ul className={['navbar-nav', styles.sidebar].join(' ')}>
@@ -36,11 +70,9 @@ function Nav() {
             </div>
             <div className={[styles.sidebarBrandText, styles.mx3].join(' ')}>SB Admin <sup>2</sup></div>
         </span>
-        <hr className={styles.sidebarDivider} />
-        <div className={styles.sidebarHeading}>Interface</div>
-
+        
         {MenuItems.map((el, index) => 
-            <MenuItemObj handleItemClick={handleItemClick} mainMenuItem={el} key={index}></MenuItemObj>
+            renderSwitch(el, index)
         )}
     </ul>);
 }
