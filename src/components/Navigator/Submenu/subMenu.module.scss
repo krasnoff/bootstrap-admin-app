@@ -6,8 +6,10 @@
     -webkit-animation: none;
     animation: none;
     margin: 0 1rem;
-    display: none;
-    transition: opacity 1s ease-out;
+
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 0.15s ease-in;
 
     .collapseInner {
       padding: 0.5rem 0;
@@ -36,10 +38,16 @@
         text-decoration: none;
         border-radius: 0.35rem;
         white-space: nowrap;
+
+        &:hover {
+          background-color: #eaecf4;
+        }
       }
     }
 }
 
 .show {
-  display: block;
+  max-height: 120px;
+  overflow: hidden;
+  transition: max-height 0.15s ease-out;
 }

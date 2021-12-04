@@ -6,7 +6,7 @@ import { SingleItem } from '../../../Types/Navigator/SingleItem';
 interface MyProps {
     subItems: SubMenuItem,
     handleItemClick: ((event: React.MouseEvent<HTMLDivElement, MouseEvent>, el: SingleItem) => void),
-    isExpand: boolean
+    isExpand?: boolean
 }
 
 function SubMenuItemObj(props: MyProps): JSX.Element {

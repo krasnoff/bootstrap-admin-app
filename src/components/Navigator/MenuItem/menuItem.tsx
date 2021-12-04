@@ -1,3 +1,4 @@
+import { faAngleDown, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -29,6 +30,7 @@ function MenuItemObj(props: MyProps): JSX.Element {
             <span className={styles.navLink} onClick={() => handleClick()}>
                 <FontAwesomeIcon icon={props.mainMenuItem.iconDefinition} className={styles.fontIcon} />
                 <span>{props.mainMenuItem.title}</span>
+                <span className={styles.angleRight}><FontAwesomeIcon icon={expanded ? faAngleDown : faAngleRight} /></span>
             </span>
         : null}
         {(props.mainMenuItem.subMenuItem) ? 
