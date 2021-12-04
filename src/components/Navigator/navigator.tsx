@@ -1,23 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './navigator.module.scss'; // Import css modules stylesheet as styles
 import { faChartArea, faCog, faLaughWink } from '@fortawesome/free-solid-svg-icons'
-import SubMenuItem from '../../Types/Navigator/SubMenuItem';
 import { SingleItem } from '../../Types/Navigator/SingleItem';
 import MainMenuItem from '../../Types/Navigator/MainMenuItem';
 import MenuItemObj from './MenuItem/menuItem';
 
 function Nav() {
-    const subMenuOne: SubMenuItem = {
-        title: 'somthing',
-        items: [{
-            title: 'sub menu 1',
-            url: 'fffff'
-        },{
-            title: 'sub menu 2',
-            url: 'ggggg'
-        }]
-    }
-
     const MenuItems: Array<MainMenuItem> = [{
         title: 'Charts',
         url: 'charts',
@@ -25,12 +13,20 @@ function Nav() {
     },{
         title: 'Component',
         iconDefinition: faCog,
-        subMenuItem: subMenuOne
+        subMenuItem: {
+            title: 'somthing',
+            items: [{
+                title: 'sub menu 1',
+                url: 'fffff'
+            },{
+                title: 'sub menu 2',
+                url: 'ggggg'
+            }]
+        }
     }];
 
     const handleItemClick = (evt: any, el: SingleItem) => {
         console.log('outer frame...', evt, el);
-        // this.props.history.push('/' + id.toLowerCase());
     }
     
     return (<ul className={['navbar-nav', styles.sidebar].join(' ')}>
@@ -42,9 +38,10 @@ function Nav() {
         </span>
         <hr className={styles.sidebarDivider} />
         <div className={styles.sidebarHeading}>Interface</div>
-        
-        <MenuItemObj handleItemClick={handleItemClick} mainMenuItem={MenuItems[0]}></MenuItemObj>
-        <MenuItemObj handleItemClick={handleItemClick} mainMenuItem={MenuItems[1]}></MenuItemObj>
+
+        {MenuItems.map((el, index) => 
+            <MenuItemObj handleItemClick={handleItemClick} mainMenuItem={el} key={index}></MenuItemObj>
+        )}
     </ul>);
 }
 
