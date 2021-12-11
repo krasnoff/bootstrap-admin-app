@@ -1,0 +1,105 @@
+.navbar {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+
+    .navbarSearch {
+        width: 25rem;
+
+        input {
+            font-size: 0.85rem;
+        }
+    }
+
+    .navbarNav {
+        display: flex;
+        flex-direction: row;
+        padding-left: 0;
+        margin-bottom: 0;
+        list-style: none;
+        margin-left: auto!important;
+
+        .navItem {
+            position: relative;
+            display: flex;
+            align-items: center;
+        
+            .navLink {
+                color: rgba(0, 0, 0, 0.55);
+                text-decoration: none;
+
+                .imgProfile {
+                    height: 2rem;
+                    width: 2rem;
+                    border-radius: 50% !important;
+                }
+
+                .mr2 {
+                    margin-right: 0.5rem!important;
+                }
+
+                .small {
+                    font-size: 80%;
+                }
+
+                &::after {
+                    display: inline-block;
+                    margin-left: 0;
+                    vertical-align: 0;
+                    content: "";
+                    border-top: 0;
+                    border-right: 0;
+                    border-bottom: 0;
+                    border-left: 0;
+                }
+
+                .badge {
+                    display: inline-block;
+                    padding: 0.25em 0.4em;
+                    font-size: 75%;
+                    font-weight: 700;
+                    line-height: 1;
+                    text-align: center;
+                    white-space: nowrap;
+                    vertical-align: baseline;
+                    border-radius: 0.35rem;
+                    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+                }
+
+                .badgeDanger {
+                    color: #fff;
+                    background-color: #e74a3b;
+                }
+
+                .badgeCounter {
+                    position: absolute;
+                    transform: scale(.7);
+                    transform-origin: top right;
+                    right: -0.6rem;;
+                    margin-top: -0.25rem;
+                }
+            }
+
+            .navLinkIcon {
+                display: flex;
+                color: #d1d3e2;
+                align-items: center;
+            }
+        }
+
+        .topbarDivider {
+            width: 0;
+            border-right: 1px solid #e3e6f0;
+            height: calc(4.375rem - 2rem);
+            margin: auto 1rem;
+        }
+    }
+}
+
+.navbar-expand {
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+}
