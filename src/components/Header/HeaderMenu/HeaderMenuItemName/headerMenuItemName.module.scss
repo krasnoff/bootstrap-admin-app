@@ -1,3 +1,5 @@
+@import '../../../../css/keyframes.scss';
+
 .navItem {
     position: relative;
     display: flex;
@@ -6,6 +8,8 @@
     .navLink {
         color: rgba(0, 0, 0, 0.55);
         text-decoration: none;
+        cursor: pointer;
+        height: 4.375rem;
 
         .imgProfile {
             height: 2rem;
@@ -32,4 +36,11 @@
             border-left: 0;
         }
     }
+}
+
+.submenuItems {
+    position: absolute;
+    inset: 25px 0px auto auto !important;
+    // animation-name: growIn;
+    // animation-duration: .2s;
 }

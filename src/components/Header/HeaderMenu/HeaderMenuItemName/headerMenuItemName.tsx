@@ -27,6 +27,34 @@ function HeaderMenuItemName() {
             </span>
         );
     });
+
+    interface MenuProps {
+        children: JSX.Element,
+        style: React.CSSProperties | undefined,
+        className: string | undefined,
+        'aria-labelledby': string | undefined
+    }
+    
+    const CustomMenu = React.forwardRef<HTMLInputElement, MenuProps>(
+        (props, ref: Ref<any>) => {
+          
+          return (
+            <div
+              ref={ref}
+              style={props.style}
+              className={[props.className, styles.submenuItems].join(' ')}
+              aria-labelledby={props['aria-labelledby']}
+            >
+              <ul className="list-unstyled">
+                {React.Children.toArray(props.children).filter(
+                  (child: any) =>
+                    'child.props.children',
+                )}
+              </ul>
+            </div>
+          );
+        },
+      );
     
     return (
         <li className={[styles.navItem, 'dropdown no-arrow'].join(' ')}>
@@ -36,10 +64,12 @@ function HeaderMenuItemName() {
                     <img className={[styles.imgProfile, 'rounded-circle'].join(' ')} src="img/undraw_profile.svg" />
                 </Dropdown.Toggle>
 
-                <Dropdown.Menu>
-                    <Dropdown.Item onClick={(event: any) => handleItemClick(event)}>Action</Dropdown.Item>
-                    <Dropdown.Item onClick={(event: any) => handleItemClick(event)}>Another action</Dropdown.Item>
-                    <Dropdown.Item onClick={(event: any) => handleItemClick(event)}>Something else</Dropdown.Item>
+                <Dropdown.Menu as={CustomMenu}>
+                    <Dropdown.Item onClick={(event: any) => handleItemClick(event)}>Profile</Dropdown.Item>
+                    <Dropdown.Item onClick={(event: any) => handleItemClick(event)}>Settings</Dropdown.Item>
+                    <Dropdown.Item onClick={(event: any) => handleItemClick(event)}>Activity Log</Dropdown.Item>
+                    <Dropdown.Divider />
+                    <Dropdown.Item onClick={(event: any) => handleItemClick(event)}>Logout</Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
         </li>
