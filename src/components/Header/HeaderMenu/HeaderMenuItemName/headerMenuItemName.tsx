@@ -1,11 +1,30 @@
-import React, { Ref } from 'react';
+import { faCogs, faList, faSignOutAlt, faUser } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { Ref, useEffect, useState } from 'react';
 import { Dropdown } from 'react-bootstrap';
+import UserDetails from '../../../../Types/Header/UserDetails';
 import styles from './headerMenuItemName.module.scss';
 
 function HeaderMenuItemName() {
+    const [userDetails, setUserDetails] = useState<UserDetails>({
+        firstName: '',
+        lastName: '',
+        picUrl: '',
+        id: ''
+    });
+    
+    useEffect(() => {
+        setUserDetails({
+            firstName: 'Kobi',
+            lastName: 'Krasnoff',
+            picUrl: 'undraw_profile.svg',
+            id: '4444333'
+        });
+    }, []);
+    
     const handleItemClick = (evt: any) => {
         console.log('item click...', evt);
-        console.log('item click value...', evt.target.innerHTML);
+        console.log('item click value...', evt.target.dataset);
     }
 
     interface InputProps {
@@ -42,7 +61,7 @@ function HeaderMenuItemName() {
             <div
               ref={ref}
               style={props.style}
-              className={[props.className, styles.submenuItems].join(' ')}
+              className={[props.className, styles.submenuItems, styles.shadow, styles.customDropDown].join(' ')}
               aria-labelledby={props['aria-labelledby']}
             >
               <ul className="list-unstyled">
@@ -60,16 +79,16 @@ function HeaderMenuItemName() {
         <li className={[styles.navItem, 'dropdown no-arrow'].join(' ')}>
             <Dropdown>
                 <Dropdown.Toggle as={CustomToggle} variant="success" id="dropdown-basic">
-                    <span className={[styles.mr2, styles.small, 'd-none d-lg-inline text-gray-600'].join(' ')}>Douglas McGee</span>
-                    <img className={[styles.imgProfile, 'rounded-circle'].join(' ')} src="img/undraw_profile.svg" />
+                    <span className={[styles.mr2, styles.small, 'd-none d-lg-inline text-gray-600'].join(' ')}>{userDetails.firstName} {userDetails.lastName}</span>
+                    <img className={[styles.imgProfile, 'rounded-circle'].join(' ')} src={'img/' + userDetails.picUrl} />
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu as={CustomMenu}>
-                    <Dropdown.Item onClick={(event: any) => handleItemClick(event)}>Profile</Dropdown.Item>
-                    <Dropdown.Item onClick={(event: any) => handleItemClick(event)}>Settings</Dropdown.Item>
-                    <Dropdown.Item onClick={(event: any) => handleItemClick(event)}>Activity Log</Dropdown.Item>
+                    <Dropdown.Item onClick={(event: any) => handleItemClick(event)} data-id="Profile" data-url="/Profile"><FontAwesomeIcon icon={faUser} className={styles.menuIcon} /> Profile</Dropdown.Item>
+                    <Dropdown.Item onClick={(event: any) => handleItemClick(event)} data-id="Settings" data-url="/Settings"><FontAwesomeIcon icon={faCogs} className={styles.menuIcon} /> Settings</Dropdown.Item>
+                    <Dropdown.Item onClick={(event: any) => handleItemClick(event)} data-id="Activity Log" data-url="/Activity Log"><FontAwesomeIcon icon={faList} className={styles.menuIcon} /> Activity Log</Dropdown.Item>
                     <Dropdown.Divider />
-                    <Dropdown.Item onClick={(event: any) => handleItemClick(event)}>Logout</Dropdown.Item>
+                    <Dropdown.Item onClick={(event: any) => handleItemClick(event)} data-id="Logout" data-url="/Logout"><FontAwesomeIcon icon={faSignOutAlt} className={styles.menuIcon} /> Logout</Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
         </li>

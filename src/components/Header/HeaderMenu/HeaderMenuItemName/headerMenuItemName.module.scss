@@ -43,4 +43,24 @@
     inset: 25px 0px auto auto !important;
     // animation-name: growIn;
     // animation-duration: .2s;
+    // transform: translate(28px, 28px) !important;
+}
+
+.shadow {
+    box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
+}
+
+.customDropDown {
+    border: 1px solid #e3e6f0;
+    font-size: .85rem;
+
+    hr {
+        color: #eaecf4;
+    }
+
+    .menuIcon {
+        color: #d1d3e2;
+        margin-right: 0.5rem;
+        font-size: 0.75rem;
+    }
 }
