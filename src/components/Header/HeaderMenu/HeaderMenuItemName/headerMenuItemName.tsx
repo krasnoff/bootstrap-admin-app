@@ -80,7 +80,7 @@ function HeaderMenuItemName() {
             <Dropdown>
                 <Dropdown.Toggle as={CustomToggle} variant="success" id="dropdown-basic">
                     <span className={[styles.mr2, styles.small, 'd-none d-lg-inline text-gray-600'].join(' ')}>{userDetails.firstName} {userDetails.lastName}</span>
-                    <img className={[styles.imgProfile, 'rounded-circle'].join(' ')} src={'img/' + userDetails.picUrl} />
+                    <img className={[styles.imgProfile, 'rounded-circle'].join(' ')} src={'img/' + userDetails.picUrl} alt="" />
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu as={CustomMenu}>

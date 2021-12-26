@@ -3,9 +3,16 @@
     display: flex;
     align-items: center;
 
+    .dropDownWrapper {
+        display: flex;
+
+
+    }
+
     .navLink {
         color: rgba(0, 0, 0, 0.55);
         text-decoration: none;
+        display: flex;
 
         &::after {
             display: inline-block;
@@ -49,5 +56,25 @@
         display: flex;
         color: #d1d3e2;
         align-items: center;
+    }
+}
+
+.submenuItems {
+    position: absolute;
+    inset: 27px 0px auto auto !important;
+}
+
+.customDropDown {
+    border: 1px solid #e3e6f0;
+    font-size: .85rem;
+
+    hr {
+        color: #eaecf4;
+    }
+
+    .menuIcon {
+        color: #d1d3e2;
+        margin-right: 0.5rem;
+        font-size: 0.75rem;
     }
 }
