@@ -1,7 +1,9 @@
+@import '../../css/colors.scss';
+
 .sidebar {
     min-height: 100vh;
     color: #fff;
-    background-color: #4e73df;
+    background-color: $blue;
   
     .sidebarBrand {
       height: 4.375rem;

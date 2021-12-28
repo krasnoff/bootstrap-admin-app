@@ -1,3 +1,5 @@
+@import '../../../css/colors.scss';
+
 .collapse {
     position: relative;
     left: 0;
@@ -17,7 +19,7 @@
       font-size: .85rem;
       margin: 0 0 1rem 0;
       padding-bottom: 0.5rem!important;
-      background-color: #fff!important;
+      background-color: $pure-white!important;
       border-radius: 0.35rem!important;
 
       .collapseHeader {
@@ -27,20 +29,20 @@
         text-transform: uppercase;
         font-weight: 800;
         font-size: .65rem;
-        color: #b7b9cc;
+        color: $gray-2;
       }
 
       .collapseItem {
         padding: 0.5rem 1rem;
         margin: 0 0.5rem;
         display: block;
-        color: #3a3b45;
+        color: $gray-1;
         text-decoration: none;
         border-radius: 0.35rem;
         white-space: nowrap;
 
         &:hover {
-          background-color: #eaecf4;
+          background-color: $white-gray-light;
         }
       }
     }

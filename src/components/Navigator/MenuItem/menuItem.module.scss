@@ -1,3 +1,5 @@
+@import '../../../css/colors.scss';
+
 .navItem {
     position: relative;
 
@@ -7,7 +9,7 @@
       text-align: left;
       padding: 1rem;
       width: 14rem;
-      color: rgba(255,255,255,.8);
+      color: $rgba-2;
       text-decoration: none;
       cursor: pointer;
 
@@ -16,7 +18,7 @@
       }
 
       &:active, &:hover {
-        color: #fff;
+        color: $pure-white;
       }
 
       .fontIcon {

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { Ref } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import styles from './headerMenuItem.module.scss';
+import stylesText from '../../../../css/texts.module.scss';
 
 function HeaderMenuItem() {
     interface InputProps {
@@ -40,12 +41,14 @@ function HeaderMenuItem() {
               className={[props.className, styles.submenuItems, styles.shadow, styles.customDropDown].join(' ')}
               aria-labelledby={props['aria-labelledby']}
             >
+              <h6 className={styles.dropdownHeader}>Message Center</h6>
               <ul className="list-unstyled">
                 {React.Children.toArray(props.children).filter(
                   (child: any) =>
                     'child.props.children',
                 )}
               </ul>
+              <a className={['dropdown-item text-center', stylesText.small, stylesText.textGray500].join(' ')} href="#">Read More Messages</a>
             </div>
           );
         },
