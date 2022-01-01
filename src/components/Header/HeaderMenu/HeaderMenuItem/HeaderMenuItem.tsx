@@ -4,6 +4,7 @@ import React, { Ref } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import styles from './headerMenuItem.module.scss';
 import stylesText from '../../../../css/texts.module.scss';
+import stylesShadows from '../../../../css/shadows.module.scss';
 
 function HeaderMenuItem() {
     interface InputProps {
@@ -38,17 +39,17 @@ function HeaderMenuItem() {
             <div
               ref={ref}
               style={props.style}
-              className={[props.className, styles.submenuItems, styles.shadow, styles.customDropDown].join(' ')}
+              className={[props.className, styles.submenuItems, stylesShadows.shadow, styles.customDropDown].join(' ')}
               aria-labelledby={props['aria-labelledby']}
             >
               <h6 className={styles.dropdownHeader}>Message Center</h6>
-              <ul className="list-unstyled">
+              <ul className={[styles.dropDownItemList].join(' ')}>
                 {React.Children.toArray(props.children).filter(
                   (child: any) =>
                     'child.props.children',
                 )}
               </ul>
-              <a className={['dropdown-item text-center', stylesText.small, stylesText.textGray500].join(' ')} href="#">Read More Messages</a>
+              <span className={['dropdown-item text-center', stylesText.small, stylesText.textGray500, styles.dropDownFooter].join(' ')}>Read More Messages</span>
             </div>
           );
         },
@@ -64,7 +65,9 @@ function HeaderMenuItem() {
                     </span>
                 </Dropdown.Toggle>
                 <Dropdown.Menu as={CustomMenu}>
-                    <Dropdown.Item>item 1</Dropdown.Item>
+                    <Dropdown.Item bsPrefix={styles.customDropDown}>item 1</Dropdown.Item>
+                    <Dropdown.Item bsPrefix={styles.customDropDown}>item 2</Dropdown.Item>
+                    <Dropdown.Item bsPrefix={styles.customDropDown}>item 3</Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
         </li>

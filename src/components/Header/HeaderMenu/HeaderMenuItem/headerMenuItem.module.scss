@@ -72,6 +72,7 @@
     padding-top: 0px;
     padding-bottom: 0px;
     border-radius: 0.35rem;
+    width: 20rem;
 
     hr {
         color: $gray-4;
@@ -86,16 +87,43 @@
     .dropdownHeader {
         background-color: $blue;
         border: 1px solid $blue;
-        padding-top: 0.75rem;
-        padding-bottom: 0.75rem;
         color: $pure-white;
         font-weight: 800;
         font-size: 0.65rem;
         display: block;
         padding: 0.5rem 1.5rem;
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
         margin-bottom: 0;
         text-transform: uppercase;
         border-top-right-radius: 0.35rem;
         border-top-left-radius: 0.35rem;
+    }
+
+    .dropDownFooter {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .dropDownItemList {
+        padding-left: 0px;
+
+        .customDropDown {
+            display: block;
+            width: 100%;
+            padding: 0.25rem 1rem;
+            clear: both;
+            font-weight: 400;
+            text-align: inherit;
+            text-decoration: none;
+            white-space: nowrap;
+            background-color: transparent;
+            border-radius: 0px;
+
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-top: 0px;
+            border-bottom: 1px solid $gray-3 !important;
+        }
     }
 }

@@ -4,6 +4,7 @@ import React, { Ref, useEffect, useState } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import UserDetails from '../../../../Types/Header/UserDetails';
 import styles from './headerMenuItemName.module.scss';
+import stylesShadows from '../../../../css/shadows.module.scss';
 
 function HeaderMenuItemName() {
     const [userDetails, setUserDetails] = useState<UserDetails>({
@@ -61,7 +62,7 @@ function HeaderMenuItemName() {
             <div
               ref={ref}
               style={props.style}
-              className={[props.className, styles.submenuItems, styles.shadow, styles.customDropDown].join(' ')}
+              className={[props.className, styles.submenuItems, stylesShadows.shadow, styles.customDropDown].join(' ')}
               aria-labelledby={props['aria-labelledby']}
             >
               <ul className="list-unstyled">
