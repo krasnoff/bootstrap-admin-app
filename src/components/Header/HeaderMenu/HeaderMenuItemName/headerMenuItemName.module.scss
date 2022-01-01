@@ -1,4 +1,5 @@
 @import '../../../../css/keyframes.scss';
+@import '../../../../css/colors.scss';
 
 .navItem {
     position: relative;
@@ -48,15 +49,15 @@
 }
 
 .customDropDown {
-    border: 1px solid #e3e6f0;
+    border: 1px solid $gray-3;
     font-size: .85rem;
 
     hr {
-        color: #eaecf4;
+        color: $gray-4;
     }
 
     .menuIcon {
-        color: #d1d3e2;
+        color: $gray-5;
         margin-right: 0.5rem;
         font-size: 0.75rem;
     }

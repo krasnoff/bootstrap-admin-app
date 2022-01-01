@@ -1,3 +1,5 @@
+@import '../../../../css/colors.scss';
+
 .navItem {
     position: relative;
     display: flex;
@@ -10,7 +12,7 @@
     }
 
     .navLink {
-        color: rgba(0, 0, 0, 0.55);
+        color: $rgba-3;
         text-decoration: none;
         display: flex;
 
@@ -39,8 +41,8 @@
         }
 
         .badgeDanger {
-            color: #fff;
-            background-color: #e74a3b;
+            color: $pure-white;
+            background-color: $red;
         }
 
         .badgeCounter {
@@ -54,7 +56,7 @@
 
     .navLinkIcon {
         display: flex;
-        color: #d1d3e2;
+        color: $gray-5;
         align-items: center;
     }
 }
@@ -65,28 +67,28 @@
 }
 
 .customDropDown {
-    border: 1px solid #e3e6f0;
+    border: 1px solid $gray-3;
     font-size: .85rem;
     padding-top: 0px;
     padding-bottom: 0px;
     border-radius: 0.35rem;
 
     hr {
-        color: #eaecf4;
+        color: $gray-4;
     }
 
     .menuIcon {
-        color: #d1d3e2;
+        color: $gray-5;
         margin-right: 0.5rem;
         font-size: 0.75rem;
     }
 
     .dropdownHeader {
-        background-color: #4e73df;
-        border: 1px solid #4e73df;
+        background-color: $blue;
+        border: 1px solid $blue;
         padding-top: 0.75rem;
         padding-bottom: 0.75rem;
-        color: #fff;
+        color: $pure-white;
         font-weight: 800;
         font-size: 0.65rem;
         display: block;
