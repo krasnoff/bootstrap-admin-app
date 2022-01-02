@@ -4,17 +4,19 @@
     position: relative;
     display: flex;
     align-items: center;
+    margin-right: 1.0rem !important;
+    margin-left: 1.0rem !important;
+    cursor: pointer;
 
     .dropDownWrapper {
         display: flex;
-
-
     }
 
     .navLink {
         color: $rgba-3;
         text-decoration: none;
         display: flex;
+        
 
         &::after {
             display: inline-block;
