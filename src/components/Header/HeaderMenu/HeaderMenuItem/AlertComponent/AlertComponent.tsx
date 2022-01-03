@@ -1,7 +1,8 @@
+import AlertComponentsProps from '../../../../../Types/Header/AlertComponentsProps';
 import styles from './AlertComponent.module.scss';
 
 interface MyProps {
-    properties: any
+    properties: AlertComponentsProps
 }
 
 function AlertComponent(outerProps: MyProps) {
