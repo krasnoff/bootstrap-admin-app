@@ -3,6 +3,8 @@ import HeaderMenuItem from './HeaderMenuItem/HeaderMenuItem';
 import HeaderMenuItemObj from '../../../Types/Header/HeaderMenuItem';
 import HeaderMenuItemName from './HeaderMenuItemName/headerMenuItemName';
 import { faBell, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import AlertComponent from './HeaderMenuItem/AlertComponent/AlertComponent';
+import MessagesComponent from './HeaderMenuItem/MessagesComponent/MessagesComponent';
 
 function HeaderMenu() {
     const headerMenuItems: Array<HeaderMenuItemObj> = [{
@@ -11,14 +13,14 @@ function HeaderMenu() {
         title: 'Alerts center',
         bottomText: 'show all alerts',
         bottomTextUrl: '/somthing',
-        subMenuItems: ['one', 'two']
+        subMenuItems: [<AlertComponent properties={null} />, <AlertComponent properties={null} />]
     },{
         iconDefinition: faEnvelope,
         numberOfMessages: 4,
         title: 'messages center',
         bottomText: 'show all alerts',
         bottomTextUrl: '/somthing',
-        subMenuItems: ['uno', 'dos', 'tres']
+        subMenuItems: [<MessagesComponent properties={null} />, <MessagesComponent properties={null} />, <MessagesComponent properties={null} />]
     }];
     
     return (

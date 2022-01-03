@@ -6,5 +6,5 @@ export default interface HeaderMenuItem {
     title: string,
     bottomText: string,
     bottomTextUrl: string,
-    subMenuItems: Array<string>
+    subMenuItems: Array<JSX.Element>
 }
