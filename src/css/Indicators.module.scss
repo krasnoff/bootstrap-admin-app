@@ -1,0 +1,17 @@
+@import './colors.scss';
+
+.bgSuccess {
+    background-color: $green!important;
+}
+
+.bgInfo {
+    background-color: $blue!important;
+}
+
+.bgWarning {
+    background-color: $orange!important;
+}
+
+.bgDanger {
+    background-color: $red!important;
+}

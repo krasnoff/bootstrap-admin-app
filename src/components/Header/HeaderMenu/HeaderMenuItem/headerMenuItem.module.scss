@@ -113,7 +113,7 @@
         .customDropDown {
             display: block;
             width: 100%;
-            padding: 0.25rem 1rem;
+            padding: 0 0 0 0;
             clear: both;
             font-weight: 400;
             text-align: inherit;
@@ -122,10 +122,14 @@
             background-color: transparent;
             border-radius: 0px;
 
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem;
             border-top: 0px;
             border-bottom: 1px solid $gray-3 !important;
+
+            &:hover {
+                background-color: $gray-4;
+                color: $gray-6;
+                text-decoration: none;
+            }
         }
     }
 }

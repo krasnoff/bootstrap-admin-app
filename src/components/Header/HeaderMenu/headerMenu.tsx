@@ -5,6 +5,7 @@ import HeaderMenuItemName from './HeaderMenuItemName/headerMenuItemName';
 import { faBell, faDonate, faEnvelope, faFileAlt } from '@fortawesome/free-solid-svg-icons';
 import AlertComponent from './HeaderMenuItem/AlertComponent/AlertComponent';
 import MessagesComponent from './HeaderMenuItem/MessagesComponent/MessagesComponent';
+import { Indicator } from '../../../Types/Header/IndicatorEnum';
 
 function HeaderMenu() {
 
@@ -42,21 +43,24 @@ function HeaderMenu() {
             alreadeyRead: false,
             iconBackgroundColor: '#ffff00',
             picUrl: 'ddd',
-            id: '4443324324'
+            id: '4443324324',
+            indicator: Indicator.Success
         }} />, <MessagesComponent properties={{
             createDate: new Date(),
             title: 'title 1',
             alreadeyRead: false,
             iconBackgroundColor: '#ffff00',
             picUrl: 'ddd',
-            id: '4443324324'
+            id: '4443324324',
+            indicator: Indicator.Success
         }} />, <MessagesComponent properties={{
             createDate: new Date(),
             title: 'title 1',
             alreadeyRead: false,
             iconBackgroundColor: '#ffff00',
             picUrl: 'ddd',
-            id: '4443324324'
+            id: '4443324324',
+            indicator: Indicator.Success
         }} />]
     }];
     
