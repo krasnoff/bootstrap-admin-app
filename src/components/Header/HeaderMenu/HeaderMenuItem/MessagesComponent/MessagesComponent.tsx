@@ -30,13 +30,12 @@ function MessagesComponent(outerProps: MyProps) {
     return (
         <div className={[styles.dropDownItem, 'd-flex align-items-center'].join(' ')}>
             <div className={[styles.dropdownListImage, ' mr-3'].join(' ')}>
-                <img className="rounded-circle" src="img/undraw_profile_1.svg" alt="..." />
+                <img className="rounded-circle" src={`img/${outerProps.properties.picUrl}`} alt="..." />
                 <div className={[styles.statusIndicator, indicator].join(' ')}></div>
             </div>
             <div className="font-weight-bold">
-                <div className={[styleText.textTruncate, styles.textTruncate].join(' ')}>Hi there! I am wondering if you can help me with a
-                    problem I've been having.</div>
-                <div className={[styleText.small, styleText.textGray500].join(' ')}>Emily Fowler · 58m</div>
+                <div className={[styleText.textTruncate, styles.textTruncate].join(' ')} title={outerProps.properties.title}>{outerProps.properties.title}</div>
+                <div className={[styleText.small, styleText.textGray500].join(' ')}>{outerProps.properties.fullName} · 58m</div>
             </div>
         </div>
     );

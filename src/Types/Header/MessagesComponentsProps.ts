@@ -7,5 +7,6 @@ export default interface MessagesComponentsProps {
     iconBackgroundColor: string,
     id: string,
     picUrl: string,
-    indicator: Indicator
+    indicator: Indicator,
+    fullName: string
 }

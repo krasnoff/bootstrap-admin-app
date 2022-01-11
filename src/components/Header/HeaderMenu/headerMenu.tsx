@@ -39,28 +39,31 @@ function HeaderMenu() {
         bottomTextUrl: '/somthing',
         subMenuItems: [<MessagesComponent properties={{
             createDate: new Date(),
-            title: 'title 1',
+            title: 'Hi there! I am wondering if you can help me with a problem I\'ve been having.',
             alreadeyRead: false,
             iconBackgroundColor: '#ffff00',
-            picUrl: 'ddd',
+            picUrl: 'undraw_profile_1.svg',
             id: '4443324324',
-            indicator: Indicator.Success
+            indicator: Indicator.Success,
+            fullName: 'Kobi Krasnoff'
         }} />, <MessagesComponent properties={{
             createDate: new Date(),
-            title: 'title 1',
+            title: 'I have the photos that you ordered last month, how would you like them sent to you?',
             alreadeyRead: false,
             iconBackgroundColor: '#ffff00',
-            picUrl: 'ddd',
+            picUrl: 'undraw_profile_2.svg',
             id: '4443324324',
-            indicator: Indicator.Success
+            indicator: Indicator.Info,
+            fullName: 'Itsik Buzu'
         }} />, <MessagesComponent properties={{
             createDate: new Date(),
-            title: 'title 1',
+            title: 'Last month\'s report looks great, I am very happy with the progress so far, keep up the good work!',
             alreadeyRead: false,
             iconBackgroundColor: '#ffff00',
-            picUrl: 'ddd',
+            picUrl: 'undraw_profile_3.svg',
             id: '4443324324',
-            indicator: Indicator.Success
+            indicator: Indicator.Warning,
+            fullName: 'Toto Coala'
         }} />]
     }];
     
