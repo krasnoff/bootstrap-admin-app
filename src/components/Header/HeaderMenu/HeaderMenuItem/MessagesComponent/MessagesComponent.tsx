@@ -3,6 +3,7 @@ import styles from './MessagesComponent.module.scss';
 import styleText from '../../../../../css/texts.module.scss'
 import styleIndicators from '../../../../../css/Indicators.module.scss'
 import { Indicator } from '../../../../../Types/Header/IndicatorEnum';
+import { useReturnDateDiff } from '../../../../../hooks/useReturnDateDiff';
 
 interface MyProps {
     properties: MessagesComponentsProps
@@ -11,6 +12,7 @@ interface MyProps {
 function MessagesComponent(outerProps: MyProps) {
 
     let indicator;
+    const myDateDiff = useReturnDateDiff(outerProps.properties.createDate);
 
     switch (outerProps.properties.indicator) {
         case Indicator.Success:
@@ -35,7 +37,7 @@ function MessagesComponent(outerProps: MyProps) {
             </div>
             <div className="font-weight-bold">
                 <div className={[styleText.textTruncate, styles.textTruncate].join(' ')} title={outerProps.properties.title}>{outerProps.properties.title}</div>
-                <div className={[styleText.small, styleText.textGray500].join(' ')}>{outerProps.properties.fullName} · 58m</div>
+                <div className={[styleText.small, styleText.textGray500].join(' ')}>{outerProps.properties.fullName} · {myDateDiff}</div>
             </div>
         </div>
     );

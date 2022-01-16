@@ -17,14 +17,14 @@ function HeaderMenu() {
         bottomText: 'show all alerts',
         bottomTextUrl: '/somthing',
         subMenuItems: [<AlertComponent properties={{
-            createDate: new Date(),
+            createDate: new Date(2022, 0, 12),
             title: 'title 1',
             alreadeyRead: false,
             iconBackgroundColor: '#ff0000',
             iconDefinition: faFileAlt,
             id: '4443324324'
         }} />, <AlertComponent properties={{
-            createDate: new Date(),
+            createDate: new Date(2021, 0, 11),
             title: 'title 2',
             alreadeyRead: false,
             iconBackgroundColor: '#ffff00',
@@ -38,7 +38,7 @@ function HeaderMenu() {
         bottomText: 'show all alerts',
         bottomTextUrl: '/somthing',
         subMenuItems: [<MessagesComponent properties={{
-            createDate: new Date(),
+            createDate: new Date(2022, 0, 12),
             title: 'Hi there! I am wondering if you can help me with a problem I\'ve been having.',
             alreadeyRead: false,
             iconBackgroundColor: '#ffff00',
@@ -47,7 +47,7 @@ function HeaderMenu() {
             indicator: Indicator.Success,
             fullName: 'Kobi Krasnoff'
         }} />, <MessagesComponent properties={{
-            createDate: new Date(),
+            createDate: new Date(2021, 0, 11),
             title: 'I have the photos that you ordered last month, how would you like them sent to you?',
             alreadeyRead: false,
             iconBackgroundColor: '#ffff00',
@@ -56,7 +56,7 @@ function HeaderMenu() {
             indicator: Indicator.Info,
             fullName: 'Itsik Buzu'
         }} />, <MessagesComponent properties={{
-            createDate: new Date(),
+            createDate: new Date(2022, 0, 16, 10, 0, 0),
             title: 'Last month\'s report looks great, I am very happy with the progress so far, keep up the good work!',
             alreadeyRead: false,
             iconBackgroundColor: '#ffff00',
