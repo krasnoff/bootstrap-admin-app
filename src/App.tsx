@@ -7,7 +7,7 @@ import Nav from './components/Navigator/navigator';
 function App() {
   return (
     <Router>
-    <div id="wrapper" className="wrapper">
+    <div id="wrapper" className="wrapper" data-testid="/wrapper/">
       <Nav></Nav>
       <div className="content-wrapper">
         <div className="content">
