@@ -4,21 +4,25 @@ export function useReturnDateDiff(dateObj: Date) {
     const [formattedDate, setFormattedDate] = useState('');
   
     useEffect(() => {
-        const timeDiff: number = new Date().getTime() - dateObj.getTime();
+        let timeDiff: number = (new Date()).getTime() - dateObj.getTime();
+
+        if (Math.abs(timeDiff) < 1000) {
+            timeDiff = 0;
+        }
 
         function parseDateDiff() {
-            if ((new Date(timeDiff).getFullYear() - 1970) > 0) {
-                setFormattedDate((new Date(timeDiff).getFullYear() - 1970).toString() + 'y');
-            } else if ((new Date(timeDiff).getMonth() + 1) > 1) {
-                setFormattedDate((new Date(timeDiff).getMonth() + 1).toString() + 'm');
-            } else if ((new Date(timeDiff).getDate()) > 1) {
-                setFormattedDate((new Date(timeDiff).getDate()).toString() + 'd');
-            } else if ((new Date(timeDiff).getHours()) > 0) {
-                setFormattedDate((new Date(timeDiff).getHours()).toString() + 'h');
-            } else if ((new Date(timeDiff).getMinutes()) > 0) {
-                setFormattedDate((new Date(timeDiff).getMinutes()).toString() + 'min');
-            } else if ((new Date(timeDiff).getSeconds()) > 0) {
-                setFormattedDate((new Date(timeDiff).getSeconds()).toString() + 's');
+            if ((new Date(timeDiff).getUTCFullYear() - 1970) > 0) {
+                setFormattedDate((new Date(timeDiff).getUTCFullYear() - 1970).toString() + 'y');
+            } else if ((new Date(timeDiff).getUTCMonth() + 1) > 1) {
+                setFormattedDate((new Date(timeDiff).getUTCMonth()).toString() + 'm');
+            } else if ((new Date(timeDiff).getUTCDate()) > 1) {
+                setFormattedDate((new Date(timeDiff).getUTCDate() - 1).toString() + 'd');
+            } else if ((new Date(timeDiff).getUTCHours()) > 0) {
+                setFormattedDate((new Date(timeDiff).getUTCHours()).toString() + 'h');
+            } else if ((new Date(timeDiff).getUTCMinutes()) > 0) {
+                setFormattedDate((new Date(timeDiff).getUTCMinutes()).toString() + 'min');
+            } else if ((new Date(timeDiff).getUTCSeconds()) > 0) {
+                setFormattedDate((new Date(timeDiff).getUTCSeconds()).toString() + 's');
             }
         }
         
