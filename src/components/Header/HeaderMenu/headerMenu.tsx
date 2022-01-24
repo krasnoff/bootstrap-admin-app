@@ -18,16 +18,16 @@ function HeaderMenu() {
         bottomTextUrl: '/somthing',
         subMenuItems: [<AlertComponent properties={{
             createDate: new Date(2022, 0, 12),
-            title: 'title 1',
+            title: 'A new monthly report is ready to download!',
             alreadeyRead: false,
             iconBackgroundColor: '#ff0000',
             iconDefinition: faFileAlt,
             id: '4443324324'
         }} />, <AlertComponent properties={{
             createDate: new Date(2021, 0, 11),
-            title: 'title 2',
-            alreadeyRead: false,
-            iconBackgroundColor: '#ffff00',
+            title: '$290.29 has been deposited into your account!',
+            alreadeyRead: true,
+            iconBackgroundColor: '#0000ff',
             iconDefinition: faDonate,
             id: '4443324324'
         }} />]

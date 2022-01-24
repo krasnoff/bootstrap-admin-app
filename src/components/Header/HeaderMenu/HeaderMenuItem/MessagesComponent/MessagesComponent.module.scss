@@ -4,9 +4,9 @@
     white-space: normal;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
-    border-left: 1px solid #e3e6f0;
-    border-right: 1px solid #e3e6f0;
-    border-bottom: 1px solid #e3e6f0;
+    border-left: 1px solid $gray-3;
+    border-right: 1px solid $gray-3;
+    border-bottom: 1px solid $gray-3;
     line-height: 1.3rem;
     padding: 0.25rem 1.5rem;
     color: $gray-6 !important;
@@ -26,14 +26,14 @@
         }
 
         .statusIndicator {
-            background-color: #eaecf4;
+            background-color: $gray-4;
             height: 0.75rem;
             width: 0.75rem;
             border-radius: 100%;
             position: absolute;
             bottom: 0;
             right: 0;
-            border: 0.125rem solid #fff;
+            border: 0.125rem solid $pure-white;
         }
     }
 
