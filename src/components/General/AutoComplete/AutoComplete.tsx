@@ -1,9 +1,9 @@
 import { useState } from "react";
 import SuggestionsListComponent from "./SuggestionsListComponent/SuggestionsListComponent";
 import styles from './AutoComplete.module.scss';
+import { useAsyncAutoComplete } from "../../../hooks/useAsyncAutoComplete";
 
 interface MyProps {
-    suggestions: Array<string>,
     classes: string,
     placeholder: string
 }
@@ -14,12 +14,28 @@ const AutoComplete = ( outerProps: MyProps ) => {
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [input, setInput] = useState("");
 
+    const data = useAsyncAutoComplete('apple');
+    // console.log('data', data)
+
+    const suggestions: Array<string> = [
+      "Alligator",
+      "Bask",
+      "Crocodilian",
+      "Death Roll",
+      "Eggs",
+      "Jaws",
+      "Reptile",
+      "Solitary",
+      "Tail",
+      "Wetlands"
+    ]
+
     const onChange = (e: any) => {
         // console.log('change', e);
         const userInput = e.target.value;
     
         // Filter our suggestions that don't contain the user's input
-        const unLinked = outerProps.suggestions.filter(
+        const unLinked = suggestions.filter(
           (suggestion: any) =>
             suggestion.toLowerCase().indexOf(userInput.toLowerCase()) > -1
         );

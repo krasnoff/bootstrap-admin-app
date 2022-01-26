@@ -9,18 +9,6 @@ function SearchBox() {
         <div className={styles.inputGroup}>
             {/* <input type="text" className="form-control bg-light border-0 small" placeholder="Search for..." /> */}
             <Autocomplete
-                suggestions={[
-                "Alligator",
-                "Bask",
-                "Crocodilian",
-                "Death Roll",
-                "Eggs",
-                "Jaws",
-                "Reptile",
-                "Solitary",
-                "Tail",
-                "Wetlands"
-                ]}
                 classes="form-control bg-light border-0 small"
                 placeholder="Search for..."
             />
