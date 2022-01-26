@@ -1,4 +1,6 @@
 import { useState } from "react";
+import SuggestionsListComponent from "./SuggestionsListComponent/SuggestionsListComponent";
+import styles from './AutoComplete.module.scss';
 
 interface MyProps {
     suggestions: Array<string>,
@@ -13,6 +15,7 @@ const AutoComplete = ( outerProps: MyProps ) => {
     const [input, setInput] = useState("");
 
     const onChange = (e: any) => {
+        // console.log('change', e);
         const userInput = e.target.value;
     
         // Filter our suggestions that don't contain the user's input
@@ -28,6 +31,7 @@ const AutoComplete = ( outerProps: MyProps ) => {
     };
 
     const onClick = (e: any) => {
+        console.log('click', e.target.innerText);
         setFilteredSuggestions([]);
         setInput(e.target.innerText);
         setActiveSuggestionIndex(0);
@@ -39,7 +43,7 @@ const AutoComplete = ( outerProps: MyProps ) => {
     }
    
     return (
-    <>
+    <div className={styles.inputText}>
       <input
         type="text"
         onChange={onChange}
@@ -48,7 +52,11 @@ const AutoComplete = ( outerProps: MyProps ) => {
         className={outerProps.classes}
         placeholder={outerProps.placeholder}
       />
-    </>
+      {showSuggestions && input && <SuggestionsListComponent 
+                                      filteredSuggestions={filteredSuggestions} 
+                                      activeSuggestionIndex={activeSuggestionIndex} 
+                                      onClick={onClick} />}
+    </div>
   );
 };
 export default AutoComplete;

@@ -1,17 +1,19 @@
+import styles from './SuggestionsListComponent.module.scss';
+
 interface MyProps {
   filteredSuggestions: any,
   activeSuggestionIndex: number,
-  onClick: React.MouseEventHandler<HTMLLIElement>
+  onClick: ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void)
 }
 
 const SuggestionsListComponent = (outerProps: MyProps) => {
     return outerProps.filteredSuggestions.length ? (
-      <ul className="suggestions">
+      <ul className={styles.suggestions}>
         {outerProps.filteredSuggestions.map((suggestion: any, index: any) => {
           let myClassName;
           // Flag the active suggestion with a class
           if (index === outerProps.activeSuggestionIndex) {
-            myClassName = "suggestion-active";
+            myClassName = styles.suggestionActive;
           }
           return (
             <li className={myClassName} key={suggestion} onClick={outerProps.onClick}>
@@ -21,7 +23,7 @@ const SuggestionsListComponent = (outerProps: MyProps) => {
         })}
       </ul>
     ) : (
-      <div className="no-suggestions">
+      <div className={styles.noSuggestions}>
         <em>No suggestions, you're on your own!</em>
       </div>
     );

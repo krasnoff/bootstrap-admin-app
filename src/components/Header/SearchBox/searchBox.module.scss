@@ -1,6 +1,11 @@
 .navbarSearch {
     width: 25rem;
 
+    .inputGroup {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+
     input {
         font-size: 0.85rem;
     }
