@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import AutoComplete from "../Types/Header/AutoComplete";
 
-export function useAsyncAutoComplete(searchStr: string) {
+export function useAsyncAutoComplete() {
     const [data, setData] = useState<AutoComplete>();
+    const [searchStr, setSearchStr] = useState<string>();
 
-    useEffect(() => {
+    const fetchDataFunc = () => {
         fetch(`https://yfapi.net/v6/finance/autocomplete?region=US&lang=en&query=${searchStr}`, {
             headers: {
                 'x-api-key': 'KhgDfpdyUt2wtkWRmkN86aOQFbCbvvbk9jH92MGb',
@@ -17,11 +18,17 @@ export function useAsyncAutoComplete(searchStr: string) {
         }).catch((error) => {
             console.log('error', error)
         });
+    }
 
-        return () => {
-            // data: data;
-        }
-    }, []);
+    const setSearchString = useCallback((searchString: string) => {
+        // console.log('useCallback', searchString)
+        setSearchStr(searchString)
+        // console.log('useCallback - 2', searchStr)
+    }, [searchStr])
 
-    return data;
+    const fetchDataAsync = useCallback(() => {
+        fetchDataFunc();
+    }, [searchStr])
+
+    return {data, setSearchString, fetchDataAsync};
 }

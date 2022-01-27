@@ -14,8 +14,9 @@ const AutoComplete = ( outerProps: MyProps ) => {
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [input, setInput] = useState("");
 
-    const data = useAsyncAutoComplete('apple');
-    // console.log('data', data)
+    const data = useAsyncAutoComplete();
+    // data.setSearchString('apple');
+    // console.log(data.fetchDataAsync());
 
     const suggestions: Array<string> = [
       "Alligator",
@@ -32,8 +33,19 @@ const AutoComplete = ( outerProps: MyProps ) => {
 
     const onChange = (e: any) => {
         // console.log('change', e);
+
         const userInput = e.target.value;
-    
+
+        data.setSearchString(userInput);/*.then(() => {
+          
+          // data.fetchDataAsync();
+          
+        })*/
+
+        console.log('data.setSearchString', data.data?.ResultSet)
+        
+        // console.log('change results', res);
+
         // Filter our suggestions that don't contain the user's input
         const unLinked = suggestions.filter(
           (suggestion: any) =>
