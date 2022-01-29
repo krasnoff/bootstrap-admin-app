@@ -10,11 +10,7 @@ test('test return autocomplete results', async () => {
     });
 
     act(() => {
-        result.current.setSearchString('apple');
-    })
-
-    act(() => {
-        result.current.fetchDataAsync();
+        result.current.sendAutoComplete('apple');
     })
 
     await waitForNextUpdate({timeout: false})

@@ -3,32 +3,27 @@ import AutoComplete from "../Types/Header/AutoComplete";
 
 export function useAsyncAutoComplete() {
     const [data, setData] = useState<AutoComplete>();
-    const [searchStr, setSearchStr] = useState<string>();
+    const [error, setError] = useState<unknown>();
 
-    const fetchDataFunc = () => {
-        fetch(`https://yfapi.net/v6/finance/autocomplete?region=US&lang=en&query=${searchStr}`, {
-            headers: {
-                'x-api-key': 'KhgDfpdyUt2wtkWRmkN86aOQFbCbvvbk9jH92MGb',
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => response.json())
-        .then(json => {
-            setData(json);
-        }).catch((error) => {
-            console.log('error', error)
-        });
-    }
+    const fetchData = async (searchString: string) => {
+        try {
+          const res = await fetch(`https://yfapi.net/v6/finance/autocomplete?region=US&lang=en&query=${searchString}`, {
+                headers: {
+                    'x-api-key': 'KhgDfpdyUt2wtkWRmkN86aOQFbCbvvbk9jH92MGb',
+                    'Content-Type': 'application/json'
+                }
+            });
+          const json = await res.json();
+  
+          setData(json);
+        } catch (error) {
+          setError(error);
+        }
+    };
 
-    const setSearchString = useCallback((searchString: string) => {
-        // console.log('useCallback', searchString)
-        setSearchStr(searchString)
-        // console.log('useCallback - 2', searchStr)
-    }, [searchStr])
+    const sendAutoComplete = useCallback((searchString: string) => {
+        fetchData(searchString);
+    }, [])
 
-    const fetchDataAsync = useCallback(() => {
-        fetchDataFunc();
-    }, [searchStr])
-
-    return {data, setSearchString, fetchDataAsync};
+    return {data, sendAutoComplete, error};
 }

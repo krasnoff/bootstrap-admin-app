@@ -1,4 +1,4 @@
-interface Item {
+export interface Item {
     exch: string,
     exchDisp: string,
     name: string,
@@ -7,7 +7,7 @@ interface Item {
     typeDisp: string
 }
 
-interface ResultSet {
+export interface ResultSet {
     Query: string,
     Result: Array<Item>
 }

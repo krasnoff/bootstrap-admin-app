@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SuggestionsListComponent from "./SuggestionsListComponent/SuggestionsListComponent";
 import styles from './AutoComplete.module.scss';
 import { useAsyncAutoComplete } from "../../../hooks/useAsyncAutoComplete";
+import AutoCompleteObj, { Item } from "../../../Types/Header/AutoComplete";
 
 interface MyProps {
     classes: string,
-    placeholder: string
+    placeholder: string,
+    onSelectSymbol: (selectedSymbol: Item) => void
 }
 
 const AutoComplete = ( outerProps: MyProps ) => {
@@ -14,61 +16,43 @@ const AutoComplete = ( outerProps: MyProps ) => {
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [input, setInput] = useState("");
 
-    const data = useAsyncAutoComplete();
-    // data.setSearchString('apple');
-    // console.log(data.fetchDataAsync());
-
-    const suggestions: Array<string> = [
-      "Alligator",
-      "Bask",
-      "Crocodilian",
-      "Death Roll",
-      "Eggs",
-      "Jaws",
-      "Reptile",
-      "Solitary",
-      "Tail",
-      "Wetlands"
-    ]
+    const {data, sendAutoComplete, error} = useAsyncAutoComplete();
 
     const onChange = (e: any) => {
-        // console.log('change', e);
-
         const userInput = e.target.value;
-
-        data.setSearchString(userInput);/*.then(() => {
-          
-          // data.fetchDataAsync();
-          
-        })*/
-
-        console.log('data.setSearchString', data.data?.ResultSet)
-        
-        // console.log('change results', res);
-
-        // Filter our suggestions that don't contain the user's input
-        const unLinked = suggestions.filter(
-          (suggestion: any) =>
-            suggestion.toLowerCase().indexOf(userInput.toLowerCase()) > -1
-        );
-    
+        sendAutoComplete(userInput);
         setInput(e.target.value);
-        setFilteredSuggestions(unLinked);
-        setActiveSuggestionIndex(0);
-        setShowSuggestions(true);
     };
 
     const onClick = (e: any) => {
-        console.log('click', e.target.innerText);
-        setFilteredSuggestions([]);
         setInput(e.target.innerText);
         setActiveSuggestionIndex(0);
         setShowSuggestions(false);
+        
+        const selectedItem = data?.ResultSet.Result.find(el => el.name === e.target.innerText);
+        if (selectedItem) {
+          outerProps.onSelectSymbol(selectedItem);
+        }
     };
 
     const onKeyDown = (e: any) => {
 
     }
+
+    const setSuggestions = (data: AutoCompleteObj | undefined) => {
+      if (data && data.ResultSet) {
+        setFilteredSuggestions(data.ResultSet.Result.map(el => el.name).sort((a, b) => a.localeCompare(b)));
+        setShowSuggestions(true);
+        setActiveSuggestionIndex(0);
+        setShowSuggestions(true);
+      }
+    }
+
+    useEffect(() => {
+      if (error) {} else if (data) {
+        setSuggestions(data);
+      }
+    }, [data, error]);
    
     return (
     <div className={styles.inputText}>

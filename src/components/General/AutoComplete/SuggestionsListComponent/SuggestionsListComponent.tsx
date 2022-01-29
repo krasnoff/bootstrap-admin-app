@@ -9,14 +9,13 @@ interface MyProps {
 const SuggestionsListComponent = (outerProps: MyProps) => {
     return outerProps.filteredSuggestions.length ? (
       <ul className={styles.suggestions}>
-        {outerProps.filteredSuggestions.map((suggestion: any, index: any) => {
+        {outerProps.filteredSuggestions.map((suggestion: string, index: number) => {
           let myClassName;
-          // Flag the active suggestion with a class
           if (index === outerProps.activeSuggestionIndex) {
             myClassName = styles.suggestionActive;
           }
           return (
-            <li className={myClassName} key={suggestion} onClick={outerProps.onClick}>
+            <li className={myClassName} key={index} onClick={outerProps.onClick}>
               {suggestion}
             </li>
           );
