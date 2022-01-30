@@ -7,7 +7,7 @@ import AutoCompleteObj, { Item } from "../../../Types/Header/AutoComplete";
 interface MyProps {
     classes: string,
     placeholder: string,
-    onSelectSymbol: (selectedSymbol: Item) => void
+    onSelectSymbol: (selectedSymbol: Item | null) => void
 }
 
 const AutoComplete = ( outerProps: MyProps ) => {
@@ -36,7 +36,7 @@ const AutoComplete = ( outerProps: MyProps ) => {
     };
 
     const onKeyDown = (e: any) => {
-
+      outerProps.onSelectSymbol(null);
     }
 
     const setSuggestions = (data: AutoCompleteObj | undefined) => {
