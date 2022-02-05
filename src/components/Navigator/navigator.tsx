@@ -15,7 +15,7 @@ function Nav() {
         menuType: MenuTypes.Seperator
     },{
         title: 'Dashboard',
-        url: 'dashboard',
+        url: 'Dashboard',
         iconDefinition: faTachometerAlt,
         menuType: MenuTypes.MenuItem
     },{
