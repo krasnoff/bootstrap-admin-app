@@ -4,12 +4,19 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import configureStore from './Store/Store';
+import { Provider } from 'react-redux';
+
+const store = configureStore();
+// store.runSaga(watcherSaga3);
 
 ReactDOM.render(
   <React.StrictMode>
+    <Provider store = { store }>
     <BrowserRouter>
       <App />
     </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

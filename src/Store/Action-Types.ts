@@ -1,0 +1,1 @@
+export const GET_SiMPLE_GRAPH = "GET_SiMPLE_GRAPH";
