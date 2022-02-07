@@ -1,12 +1,12 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import createSagaMiddleware, { runSaga } from "redux-saga";
-// import getD3Data from './Reducers/getD3Data';
+import MarketSummeryReducer from './Reducers/MarketSummery';
 
 const storeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const initialiseSagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
-  // D3Data: getD3Data
+  MarketSummery: MarketSummeryReducer
 });
   
 const configureStore = () => {

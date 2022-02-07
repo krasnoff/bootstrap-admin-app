@@ -6,9 +6,10 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import configureStore from './Store/Store';
 import { Provider } from 'react-redux';
+import watcherSaga from './Store/Sagas/MarketSummery';
 
 const store = configureStore();
-// store.runSaga(watcherSaga3);
+store.runSaga(watcherSaga);
 
 ReactDOM.render(
   <React.StrictMode>
