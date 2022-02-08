@@ -1,5 +1,5 @@
 import { GET_MARKET_SUMMARY } from "../Action-Types";
 
-export function getD3ChartSaga() {
+export function getMarketSummery() {
     return { type: GET_MARKET_SUMMARY };
 }

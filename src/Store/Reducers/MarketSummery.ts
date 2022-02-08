@@ -1,10 +1,10 @@
-import { GET_MARKET_SUMMARY } from "../Action-Types";
+import { MARKET_SUMMERY_DATA_LOADED } from "../Action-Types";
 import initialState from "../state";
 
 function MarketSummeryReducer(state = initialState, action: any) {
-    if (action.type === GET_MARKET_SUMMARY) {
+    if (action.type === MARKET_SUMMERY_DATA_LOADED) {
         return Object.assign({}, state, {
-            d3Graph: state.marketSummaryResponse = action.payload
+            marketSummaryResponse: state.marketSummaryResponse = action.payload
         });
     }
 
