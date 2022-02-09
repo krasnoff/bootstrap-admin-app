@@ -1,0 +1,32 @@
+@import '../../../css/colors.scss';
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: $pure-white;
+    background-clip: border-box;
+    border: 1px solid $gray-3;
+    border-radius: 0.35rem;
+
+    .header {
+        padding: 0.75rem 1.25rem;
+        margin-bottom: 0;
+        background-color: $white-gray-light;
+        border-bottom: 1px solid $gray-3;
+        padding-bottom: 1rem!important;
+        padding-top: 1rem!important;
+    }
+
+    .body {
+        flex: 1 1 auto;
+        min-height: 1px;
+        padding: 1.25rem;
+    }
+}
+
+.shadow {
+    box-shadow: 0 .15rem 1.75rem 0 $rgba-4!important;
+}
