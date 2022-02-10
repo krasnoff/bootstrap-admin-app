@@ -1,9 +1,9 @@
 import { takeEvery, call, put } from "redux-saga/effects";
 import { MarketSummaryResponse } from "../../Types/Store/MarketSummary";
-import { API_ERRORED, GET_MARKET_SUMMARY, MARKET_SUMMERY_DATA_LOADED } from "../Action-Types";
+import { API_ERRORED, GET_SERVER_DATA } from "../Action-Types";
 
 export default function* watcherSaga() {
-    yield takeEvery(GET_MARKET_SUMMARY, workerSaga);
+    yield takeEvery(GET_SERVER_DATA, workerSaga);
 }
 
 /**
@@ -15,16 +15,17 @@ export default function* watcherSaga() {
 function* workerSaga(args: any): any {
     try {
         const payload = yield call(getDataSaga, args);
-        yield put({ type: MARKET_SUMMERY_DATA_LOADED, payload });
+        yield put({ type: args.target, payload });
     } catch (e) {
         yield put({ type: API_ERRORED, payload: e });
     }
 }
 
-function getDataSaga(args: any): Promise<MarketSummaryResponse> {
-    return fetch("https://yfapi.net/v6/finance/quote/marketSummary", {
+function getDataSaga(args: any): Promise<any> {
+    const REACT_APP_SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
+    return fetch(`${REACT_APP_SERVER_BASE_URL}${args.url}`, {
         headers: {
-            'x-api-key': 'KhgDfpdyUt2wtkWRmkN86aOQFbCbvvbk9jH92MGb'
+            'x-api-key': process.env.REACT_APP_API_KEY as string
         }
     }).then(response =>
         response.json()

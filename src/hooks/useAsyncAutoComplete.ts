@@ -7,9 +7,10 @@ export function useAsyncAutoComplete() {
 
     const fetchData = async (searchString: string) => {
         try {
-          const res = await fetch(`https://yfapi.net/v6/finance/autocomplete?region=US&lang=en&query=${searchString}`, {
+          const REACT_APP_SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
+          const res = await fetch(`${REACT_APP_SERVER_BASE_URL}/v6/finance/autocomplete?region=US&lang=en&query=${searchString}`, {
                 headers: {
-                    'x-api-key': 'KhgDfpdyUt2wtkWRmkN86aOQFbCbvvbk9jH92MGb',
+                    'x-api-key': process.env.REACT_APP_API_KEY as string,
                     'Content-Type': 'application/json'
                 }
             });

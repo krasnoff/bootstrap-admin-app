@@ -1,7 +1,7 @@
 import styles from '../pages.module.scss';
 import stylesText from '../../css/texts.module.scss';
 import stylesMargins from '../../css/margins.module.scss';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { MarketSummaryResponse } from '../../Types/Store/MarketSummary';
 import { getMarketSummery } from '../../Store/Actions/MarketSummery';
 import { useEffect, useState } from 'react';
@@ -26,9 +26,8 @@ function DashBoard(outerProps: MyProps) {
     }, []);
 
     useEffect(() => {
-      // console.log('data')
       if ((outerProps as any).marketSummaryResponse.MarketSummery.marketSummaryResponse.marketSummaryResponse) {
-        setResults((outerProps as any).marketSummaryResponse.MarketSummery.marketSummaryResponse.marketSummaryResponse.result)
+        setResults((outerProps as any).marketSummaryResponse.MarketSummery.marketSummaryResponse.marketSummaryResponse.result);
       }      
     }, [outerProps.marketSummaryResponse]);
 
@@ -84,7 +83,7 @@ const mapStateToProps = (state: MarketSummaryResponse) => {
 
 const mapDispatchToProps = () => {
   return {
-    getMarketSummery: (args: any) => getMarketSummery()
+    getMarketSummery: () => getMarketSummery()
   }
 }
 
