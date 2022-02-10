@@ -8,6 +8,8 @@ import { useEffect, useState } from 'react';
 import ComponentWrapper from '../../components/General/ComponentWrapper/ComponentWrapper';
 import { Table } from 'react-bootstrap';
 import { Item } from '../../Types/Store/MarketSummary';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
 
 interface MyProps {
   getMarketSummery: any,
@@ -30,6 +32,10 @@ function DashBoard(outerProps: MyProps) {
       }      
     }, [outerProps.marketSummaryResponse]);
 
+    const formatPrice = (price: number): string => {
+      return price.toLocaleString();
+    }
+
     return (
       <div className={styles.containerFluid}>
         <h1 className={[stylesText.h3, stylesMargins.mb0, stylesText.textGray800].join(' ')}>Dashboard</h1>
@@ -50,8 +56,17 @@ function DashBoard(outerProps: MyProps) {
                     <td>{el.exchangeTimezoneName}</td>
                     <td>{el.shortName}</td>
                     <td>{el.symbol}</td>
-                    <td>{el.regularMarketPrice.raw}</td>
-                    <td>{el.regularMarketChange.raw}</td>
+                    <td>{formatPrice(el.regularMarketPrice.raw)}</td>
+                    <td className={el.regularMarketChangePercent.raw < 0 ? styles.red : styles.green}>
+                      <div className={styles.arrowFramework}>
+                        <div>{formatPrice(el.regularMarketChangePercent.raw * 100)}%</div>
+                        <div>
+                          {el.regularMarketChangePercent.raw < 0 ? 
+                          <FontAwesomeIcon icon={faArrowDown} /> :
+                          <FontAwesomeIcon icon={faArrowUp} />}    
+                        </div>
+                      </div>                  
+                    </td>
                   </tr>
                 )}
             </tbody>

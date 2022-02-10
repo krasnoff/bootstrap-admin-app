@@ -1,4 +1,19 @@
+@import '../css/colors.scss';
+
 .containerFluid {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+}
+
+.red {
+    color: $red !important;
+}
+
+.green {
+    color: $green !important;
+}
+
+.arrowFramework {
+    display: flex;
+    justify-content: space-between;
 }
