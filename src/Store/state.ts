@@ -8,6 +8,9 @@ const initialState: any = {
     quoteSummary: {
         error: null,
         result: []
+    },
+    error: {
+        error: null
     }
 };
 

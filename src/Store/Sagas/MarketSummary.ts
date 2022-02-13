@@ -28,10 +28,14 @@ function getDataSaga(args: any): Promise<any> {
         url += '?' + args.querystring;
     }
     return fetch(`${process.env.REACT_APP_SERVER_BASE_URL}${url}`, {
-        headers: {
-            'x-api-key': process.env.REACT_APP_API_KEY as string
+        // headers: {
+        //     'x-api-key': process.env.REACT_APP_API_KEY as string
+        // }
+    }).then(response => {
+        if (response.ok) {
+            return response.json()
+        } else {
+            throw new Error(response.status.toString());
         }
-    }).then(response =>
-        response.json()
-    );
+    });
 }
