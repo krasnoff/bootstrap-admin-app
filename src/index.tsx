@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import configureStore from './Store/Store';
 import { Provider } from 'react-redux';
-import watcherSaga from './Store/Sagas/MarketSummery';
+import watcherSaga from './Store/Sagas/MarketSummary';
 
 const store = configureStore();
 store.runSaga(watcherSaga);

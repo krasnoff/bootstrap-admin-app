@@ -3,7 +3,7 @@ import stylesText from '../../css/texts.module.scss';
 import stylesMargins from '../../css/margins.module.scss';
 import { connect, useDispatch } from 'react-redux';
 import { MarketSummaryResponse } from '../../Types/Store/MarketSummary';
-import { getMarketSummery } from '../../Store/Actions/MarketSummery';
+import { getMarketSummery } from '../../Store/Actions/MarketSummary';
 import { useEffect, useState } from 'react';
 import ComponentWrapper from '../../components/General/ComponentWrapper/ComponentWrapper';
 import { Table } from 'react-bootstrap';
@@ -38,7 +38,7 @@ function DashBoard(outerProps: MyProps) {
     return (
       <div className={styles.containerFluid}>
         <h1 className={[stylesText.h3, stylesMargins.mb0, stylesText.textGray800].join(' ')}>Dashboard</h1>
-        <ComponentWrapper title='Market Summery'>
+        <ComponentWrapper title='Market Summary'>
           <Table striped bordered hover>
             <thead>
               <tr>

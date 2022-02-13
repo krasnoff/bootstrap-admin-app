@@ -1,7 +1,4 @@
-export interface Rate {
-    fmt: string,
-    raw: number
-}
+import { Rate } from './Rate';
 
 export interface Item {
     exchange: string

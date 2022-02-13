@@ -1,9 +1,10 @@
 import { takeEvery, call, put } from "redux-saga/effects";
 import { MarketSummaryResponse } from "../../Types/Store/MarketSummary";
-import { API_ERRORED, GET_SERVER_DATA } from "../Action-Types";
+import { API_ERRORED, GET_QOUTE_SUMMERY_DATA, GET_SERVER_DATA } from "../Action-Types";
 
 export default function* watcherSaga() {
     yield takeEvery(GET_SERVER_DATA, workerSaga);
+    yield takeEvery(GET_QOUTE_SUMMERY_DATA, workerSaga);
 }
 
 /**
@@ -22,8 +23,11 @@ function* workerSaga(args: any): any {
 }
 
 function getDataSaga(args: any): Promise<any> {
-    const REACT_APP_SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
-    return fetch(`${REACT_APP_SERVER_BASE_URL}${args.url}`, {
+    let url = args.url;
+    if (args.querystring) {
+        url += '?' + args.querystring;
+    }
+    return fetch(`${process.env.REACT_APP_SERVER_BASE_URL}${url}`, {
         headers: {
             'x-api-key': process.env.REACT_APP_API_KEY as string
         }
