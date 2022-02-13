@@ -21,15 +21,13 @@ function CompanyReview(outerProps: MyProps) {
         let user = searchParams['companySymbol']
         if (user) {
             setCompanySymbol(user);
-            if (companySymbol && companySymbol !== '') {
-              dispatch(outerProps.getQuoteSummery(companySymbol)); 
+            if (user && user !== '') {
+              dispatch(outerProps.getQuoteSummery(user)); 
             }
         }
         
-    }, [companySymbol]);
-
-        
-    
+    }, [searchParams]);
+   
     return (
       <div className={styles.containerFluid}>
         <h1 className={[stylesText.h3, stylesMargins.mb0, stylesText.textGray800].join(' ')}>Company Review</h1>

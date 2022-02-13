@@ -17,7 +17,7 @@ function SearchBox() {
     }
 
     const clickHandler = () => {
-        navigate(`/companyReview/${selectedItem?.symbol}/`);
+        navigate(`/companyReview/${selectedItem?.symbol}`);
     }
     
     return (

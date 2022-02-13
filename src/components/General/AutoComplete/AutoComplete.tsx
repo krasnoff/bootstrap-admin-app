@@ -29,7 +29,7 @@ const AutoComplete = ( outerProps: MyProps ) => {
         setActiveSuggestionIndex(0);
         setShowSuggestions(false);
         
-        const selectedItem = data?.ResultSet.Result.find(el => el.name === e.target.innerText);
+        const selectedItem = data?.ResultSet.Result.find(el => el.symbol + ' - ' + el.name === e.target.innerText);
         if (selectedItem) {
           outerProps.onSelectSymbol(selectedItem);
         }
@@ -41,7 +41,7 @@ const AutoComplete = ( outerProps: MyProps ) => {
 
     const setSuggestions = (data: AutoCompleteObj | undefined) => {
       if (data && data.ResultSet) {
-        setFilteredSuggestions(data.ResultSet.Result.map(el => el.name).sort((a, b) => a.localeCompare(b)));
+        setFilteredSuggestions(data.ResultSet.Result.map(el => el.symbol + ' - ' + el.name).sort((a, b) => a.localeCompare(b)));
         setShowSuggestions(true);
         setActiveSuggestionIndex(0);
         setShowSuggestions(true);
