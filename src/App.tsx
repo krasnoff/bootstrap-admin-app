@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { Toast, ToastContainer } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import './App.scss';
@@ -14,8 +15,16 @@ interface MyProps {
 }
 
 function App(props: MyProps) {
+  const [toastShow, setToastShow] = useState<boolean>(false);
+
+  const setShow = (isShow: boolean) => {
+    setToastShow(false);
+  }
+  
   useEffect(() => {
-    console.log('props..', props);    
+    if (props.errorSummery) {
+      setToastShow(true) 
+    }    
   }, [props.errorSummery]);
   
   return (
@@ -34,6 +43,20 @@ function App(props: MyProps) {
         </div>
         <Footer></Footer>
       </div>
+      <ToastContainer className="p-3" position="bottom-end">
+      <Toast onClose={() => setShow(false)} show={toastShow} delay={3000} bg="danger" autohide>
+          <Toast.Header>
+            <img
+              src="holder.js/20x20?text=%20"
+              className="rounded me-2"
+              alt=""
+            />
+            <strong className="me-auto">Error Message</strong>
+            <small>&nbsp;</small>
+          </Toast.Header>
+          <Toast.Body>Error {props.errorSummery}. Please call administrator</Toast.Body>
+      </Toast>
+      </ToastContainer>
     </div>
     
   );
