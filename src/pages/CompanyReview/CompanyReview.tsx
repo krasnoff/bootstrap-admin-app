@@ -48,10 +48,10 @@ function CompanyReview(outerProps: MyProps) {
     useEffect(() => {
       if (outerProps.quoteSummaryResponse.QuoteSummary.quoteSummeryResponse?.quoteSummary.error) {
         const response = outerProps.quoteSummaryResponse.QuoteSummary.quoteSummeryResponse.quoteSummary;
-        console.log('response error', response.error);
+        console.log('response', response);
         dispatch(outerProps.getErrorSummery(response.error.description)); 
       }
-    }, [outerProps.quoteSummaryResponse.QuoteSummary.quoteSummeryResponse?.quoteSummary.error]);
+    }, [outerProps.quoteSummaryResponse.QuoteSummary.quoteSummeryResponse?.quoteSummary]);
    
     return (
       <div className={styles.containerFluid}>
