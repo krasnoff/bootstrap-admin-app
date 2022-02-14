@@ -68,12 +68,4 @@ const mapStateToProps = (state: any) => {
   }
 }
 
-// const mapDispatchToProps = () => {
-//   return {
-//     getQuoteSummery: (symbol: string, queryString: string) => getQuoteSummery(symbol, 'lang=en&region=US&modules=defaultKeyStatistics%2CassetProfile')
-//   }
-// }
-  
 export default connect(mapStateToProps, null)(App);
-
-// export default App;

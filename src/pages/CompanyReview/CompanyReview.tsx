@@ -6,10 +6,12 @@ import { useEffect, useState } from 'react';
 import { getQuoteSummery } from '../../Store/Actions/QuoteSummary';
 import { connect, useDispatch } from 'react-redux';
 import { QuoteSummaryResponse } from '../../Types/Store/QuoteSummery';
+import { getErrorSummery } from '../../Store/Actions/ErrorSummary';
 
 interface MyProps {
   getQuoteSummery?: any,
-  quoteSummeryResponse?: QuoteSummaryResponse
+  getErrorSummery?: any,
+  quoteSummaryResponse?: any
 }
 
 function CompanyReview(outerProps: MyProps) {
@@ -27,6 +29,29 @@ function CompanyReview(outerProps: MyProps) {
         }
         
     }, [searchParams]);
+
+    useEffect(() => {
+      // if (outerProps.quoteSummaryResponse.QuoteSummary.quoteSummeryResponse) {
+      //   const response = outerProps.quoteSummaryResponse.QuoteSummary.quoteSummeryResponse.quoteSummary;
+      //   console.log('response', response);
+
+      //   if (response.error) {
+      //     console.log('response error', response.error);
+      //     // dispatch(outerProps.getErrorSummery(response.error.description)); 
+      //   } else {
+      //     console.log('response result', response.result);
+      //   }
+      // }
+      
+    }, []);
+
+    useEffect(() => {
+      if (outerProps.quoteSummaryResponse.QuoteSummary.quoteSummeryResponse?.quoteSummary.error) {
+        const response = outerProps.quoteSummaryResponse.QuoteSummary.quoteSummeryResponse.quoteSummary;
+        console.log('response error', response.error);
+        dispatch(outerProps.getErrorSummery(response.error.description)); 
+      }
+    }, [outerProps.quoteSummaryResponse.QuoteSummary.quoteSummeryResponse?.quoteSummary.error]);
    
     return (
       <div className={styles.containerFluid}>
@@ -44,7 +69,8 @@ const mapStateToProps = (state: QuoteSummaryResponse) => {
 
 const mapDispatchToProps = () => {
   return {
-    getQuoteSummery: (symbol: string, queryString: string) => getQuoteSummery(symbol, 'lang=en&region=US&modules=defaultKeyStatistics%2CassetProfile')
+    getQuoteSummery: (symbol: string, queryString: string) => getQuoteSummery(symbol, 'lang=en&region=US&modules=defaultKeyStatistics%2CassetProfile'),
+    getErrorSummery: (errorMessage: string) => getErrorSummery(errorMessage)
   }
 }
   
