@@ -62,7 +62,7 @@ export interface CompanyOfficer {
     maxAge: number,
     name: number,
     title: number,
-    totalPay: number,
+    totalPay: Rate,
     unexercisedValue: Rate,
     yearBorn: number
 }

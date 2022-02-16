@@ -2,7 +2,7 @@ import styles from '../pages.module.scss';
 import stylesText from '../../css/texts.module.scss';
 import stylesMargins from '../../css/margins.module.scss';
 import { useParams } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { getQuoteSummery } from '../../Store/Actions/QuoteSummary';
 import { connect, useDispatch } from 'react-redux';
 import { QuoteSummaryResponse } from '../../Types/Store/QuoteSummery';
@@ -18,7 +18,6 @@ interface MyProps {
 
 function CompanyReview(outerProps: MyProps) {
     let searchParams = useParams();
-    let [companySymbol, setCompanySymbol] = useState('');
     const dispatch = useDispatch();
 
     const previousErrorDescriptionRef = useRef(outerProps.quoteSummaryResponse.QuoteSummary.quoteSummeryResponse?.quoteSummary?.error?.description);
@@ -27,7 +26,6 @@ function CompanyReview(outerProps: MyProps) {
     useEffect(() => {
         let user = searchParams['companySymbol']
         if (user) {
-            setCompanySymbol(user);
             if (user && user !== '') {
               dispatch(outerProps.getQuoteSummery(user)); 
             }

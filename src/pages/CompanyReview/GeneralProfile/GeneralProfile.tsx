@@ -6,10 +6,42 @@ interface MyProps {
   }
 
 function GeneralProfile(props: MyProps) {
-    
-
     return (
-      <div>General Data</div>
+      <>
+          {props.assetProfile ? 
+          <div>
+            <h4>General Company Data</h4>
+            <div className={styles.paragraph}>
+                <div>{props.assetProfile.address1}, {props.assetProfile.city}, {props.assetProfile.state}, {props.assetProfile.country}</div>
+                <div>Tel.: {props.assetProfile.phone}</div>
+                <div>URL: <a href={props.assetProfile.website} target="_blank" rel="noopener noreferrer">{props.assetProfile.website}</a></div>
+            </div>
+            <div className={styles.paragraph}>{props.assetProfile.longBusinessSummary}</div>
+            <div className={styles.paragraph}>
+                <table className={styles.companyOfficersTable}>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Title</th>
+                            <th>Annual Salary</th>
+                            <th>Age</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {props.assetProfile.companyOfficers.map((el, index) => 
+                        <tr key={index}>
+                            <td>{el.name}</td>
+                            <td>{el.title}</td>
+                            <td>{el.totalPay?.raw.toLocaleString()}</td>
+                            <td>{el.age}</td>
+                        </tr>
+                    )}
+                    </tbody>
+                </table>
+            </div>
+          </div>
+          : null }
+      </>
     );
 }
 
