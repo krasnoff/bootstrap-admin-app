@@ -1,5 +1,4 @@
 import { takeEvery, call, put } from "redux-saga/effects";
-import { MarketSummaryResponse } from "../../Types/Store/MarketSummary";
 import { API_ERRORED, GET_QOUTE_SUMMERY_DATA, GET_SERVER_DATA } from "../Action-Types";
 
 export default function* watcherSaga() {

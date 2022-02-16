@@ -30,7 +30,7 @@ function CompanyReview(outerProps: MyProps) {
               dispatch(outerProps.getQuoteSummery(user)); 
             }
         }
-        
+    // eslint-disable-next-line    
     }, [searchParams]);
 
     // get results data
@@ -43,6 +43,7 @@ function CompanyReview(outerProps: MyProps) {
     }, [outerProps.quoteSummaryResponse.QuoteSummary.quoteSummeryResponse?.quoteSummary]);
 
     // get erro data
+    
     useEffect(() => {
       if (outerProps.quoteSummaryResponse.QuoteSummary.quoteSummeryResponse?.quoteSummary.error) {
         const response = outerProps.quoteSummaryResponse.QuoteSummary.quoteSummeryResponse.quoteSummary;
@@ -52,7 +53,8 @@ function CompanyReview(outerProps: MyProps) {
           previousErrorDescriptionRef.current = response.error.description;
         }
       }
-    }, [outerProps.quoteSummaryResponse.QuoteSummary.quoteSummeryResponse?.quoteSummary]);
+    // eslint-disable-next-line
+    }, [outerProps.quoteSummaryResponse.QuoteSummary.quoteSummeryResponse?.quoteSummary]);  
 
     return (
       <div className={styles.containerFluid}>

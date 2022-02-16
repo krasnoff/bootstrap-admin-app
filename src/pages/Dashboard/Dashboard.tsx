@@ -23,12 +23,14 @@ function DashBoard(outerProps: MyProps) {
 
     useEffect(() => {
       dispatch(outerProps.getMarketSummery()); 
+    // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
       if ((outerProps as any).marketSummaryResponse.MarketSummery.marketSummaryResponse.marketSummaryResponse) {
         setResults((outerProps as any).marketSummaryResponse.MarketSummery.marketSummaryResponse.marketSummaryResponse.result);
-      }      
+      } 
+    // eslint-disable-next-line     
     }, [outerProps.marketSummaryResponse]);
 
     const formatPrice = (price: number): string => {
