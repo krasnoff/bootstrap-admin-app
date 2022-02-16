@@ -90,8 +90,25 @@ export interface AssetProfile {
     zip: string
 }
 
+export interface QuoteType {
+    exchange: string
+    firstTradeDateEpochUtc: Date
+    gmtOffSetMilliseconds: number
+    longName: string
+    maxAge: number
+    messageBoardId: string
+    quoteType: string
+    shortName: string
+    symbol: string
+    timeZoneFullName: string
+    timeZoneShortName: string
+    underlyingSymbol: string
+    uuid: string
+}
+
 export interface QuoteSummaryResponse extends ResponseObj {
     result: Array<{
-        assetProfile: AssetProfile
+        assetProfile: AssetProfile,
+        quoteType: QuoteType
     }>
 }

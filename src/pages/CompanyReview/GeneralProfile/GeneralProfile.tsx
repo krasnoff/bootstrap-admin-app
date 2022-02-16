@@ -1,8 +1,9 @@
-import { AssetProfile } from '../../../Types/Store/QuoteSummery';
+import { AssetProfile, QuoteType } from '../../../Types/Store/QuoteSummery';
 import styles from './GeneralProfile.module.scss';
 
 interface MyProps {
-    assetProfile: AssetProfile
+    assetProfile: AssetProfile,
+    quoteType: QuoteType
   }
 
 function GeneralProfile(props: MyProps) {
@@ -10,7 +11,7 @@ function GeneralProfile(props: MyProps) {
       <>
           {props.assetProfile ? 
           <div>
-            <h4>General Company Data</h4>
+            <h4>{props.quoteType.longName}</h4>
             <div className={styles.paragraph}>
                 <div>{props.assetProfile.address1}, {props.assetProfile.city}, {props.assetProfile.state}, {props.assetProfile.country}</div>
                 <div>Tel.: {props.assetProfile.phone}</div>

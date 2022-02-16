@@ -58,7 +58,10 @@ function CompanyReview(outerProps: MyProps) {
       <div className={styles.containerFluid}>
         <h1 className={[stylesText.h3, stylesMargins.mb0, stylesText.textGray800].join(' ')}>Company Review</h1>
         <ComponentWrapper title='General Data'>
-          <GeneralProfile assetProfile={outerProps.quoteSummaryResponse.QuoteSummary.quoteSummeryResponse?.quoteSummary.result[0].assetProfile}></GeneralProfile>
+          <GeneralProfile 
+            assetProfile={outerProps.quoteSummaryResponse.QuoteSummary.quoteSummeryResponse?.quoteSummary.result[0].assetProfile}
+            quoteType={outerProps.quoteSummaryResponse.QuoteSummary.quoteSummeryResponse?.quoteSummary.result[0].quoteType}
+          ></GeneralProfile>
         </ComponentWrapper>
       </div>
     );
@@ -72,7 +75,7 @@ const mapStateToProps = (state: QuoteSummaryResponse) => {
 
 const mapDispatchToProps = () => {
   return {
-    getQuoteSummery: (symbol: string, queryString: string) => getQuoteSummery(symbol, 'lang=en&region=US&modules=assetProfile'),
+    getQuoteSummery: (symbol: string, queryString: string) => getQuoteSummery(symbol, 'lang=en&region=US&modules=assetProfile%2CquoteType'),
     getErrorSummery: (errorMessage: string) => getErrorSummery(errorMessage)
   }
 }
