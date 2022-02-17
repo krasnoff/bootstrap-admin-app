@@ -9,7 +9,11 @@ const initialState: any = {
     },
     error: {
         error: null
-    }
+    },
+    chartSummary: {
+        error: null,
+        result: []
+    },
 };
 
 export default initialState;

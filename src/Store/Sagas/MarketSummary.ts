@@ -1,9 +1,10 @@
 import { takeEvery, call, put } from "redux-saga/effects";
-import { API_ERRORED, GET_QOUTE_SUMMERY_DATA, GET_SERVER_DATA } from "../Action-Types";
+import { API_ERRORED, GET_CHART_DATA, GET_QOUTE_SUMMERY_DATA, GET_SERVER_DATA } from "../Action-Types";
 
 export default function* watcherSaga() {
     yield takeEvery(GET_SERVER_DATA, workerSaga);
     yield takeEvery(GET_QOUTE_SUMMERY_DATA, workerSaga);
+    yield takeEvery(GET_CHART_DATA, workerSaga);
 }
 
 /**

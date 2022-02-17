@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getErrorSummery } from '../../Store/Actions/ErrorSummary';
 import ComponentWrapper from '../../components/General/ComponentWrapper/ComponentWrapper';
 import GeneralProfile from './GeneralProfile/GeneralProfile';
+import { getChart } from '../../Store/Actions/ChartSummery';
 
 function CompanyReview() {
     const data = useSelector(state => state);
@@ -15,16 +16,26 @@ function CompanyReview() {
     const dispatch = useDispatch();
 
     const previousErrorDescriptionRef = useRef((data as any).QuoteSummary.quoteSummeryResponse?.quoteSummary?.error?.description);
+    const previousChartRef = useRef((data as any).chartSummary);
 
     // dispatch data
     useEffect(() => {
-        let user = searchParams['companySymbol']
-        if (user) {
-            if (user && user !== '') {
-              dispatch(getQuoteSummery(user, 'lang=en&region=US&modules=assetProfile%2CquoteType')); 
+        let symbol = searchParams['companySymbol']
+        if (symbol) {
+            if (symbol && symbol !== '') {
+              dispatch(getQuoteSummery(symbol, 'lang=en&region=US&modules=assetProfile%2CquoteType')); 
+              dispatch(getChart(symbol, 'range=1mo&region=US&interval=1d&lang=en')); 
             }
         }
     }, [searchParams, dispatch]);
+
+    // get chart data
+    useEffect(() => {
+      if (JSON.stringify(previousChartRef.current) !== JSON.stringify((data as any).ChartReducer.chartSummary)) {
+        console.log('data', data);
+        previousChartRef.current = (data as any).ChartReducer.chartSummary;
+      }
+    });  
 
     // get error data
     useEffect(() => {
