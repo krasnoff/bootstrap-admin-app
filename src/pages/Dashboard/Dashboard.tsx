@@ -1,8 +1,7 @@
 import styles from '../pages.module.scss';
 import stylesText from '../../css/texts.module.scss';
 import stylesMargins from '../../css/margins.module.scss';
-import { connect, useDispatch } from 'react-redux';
-import { MarketSummaryResponse } from '../../Types/Store/MarketSummary';
+import { useDispatch, useSelector } from 'react-redux';
 import { getMarketSummery } from '../../Store/Actions/MarketSummary';
 import { useEffect, useState } from 'react';
 import ComponentWrapper from '../../components/General/ComponentWrapper/ComponentWrapper';
@@ -11,27 +10,20 @@ import { Item } from '../../Types/Store/MarketSummary';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
 
-interface MyProps {
-  getMarketSummery: any,
-  marketSummaryResponse: MarketSummaryResponse
-}
-
-function DashBoard(outerProps: MyProps) {
-    // const data = useSelector(state => state);
+function DashBoard() {
+    const data = useSelector(state => state);
     const dispatch = useDispatch();
     const [results, setResults] = useState<Array<Item>>([])
 
     useEffect(() => {
-      dispatch(outerProps.getMarketSummery()); 
-    // eslint-disable-next-line
-    }, []);
+      dispatch(getMarketSummery()); 
+    }, [dispatch]);
 
     useEffect(() => {
-      if ((outerProps as any).marketSummaryResponse.MarketSummery.marketSummaryResponse.marketSummaryResponse) {
-        setResults((outerProps as any).marketSummaryResponse.MarketSummery.marketSummaryResponse.marketSummaryResponse.result);
+      if ((data as any).MarketSummery.marketSummaryResponse.marketSummaryResponse) {
+        setResults((data as any).MarketSummery.marketSummaryResponse.marketSummaryResponse.result);
       } 
-    // eslint-disable-next-line     
-    }, [outerProps.marketSummaryResponse]);
+    }, [data]);
 
     const formatPrice = (price: number): string => {
       return price.toLocaleString();
@@ -76,18 +68,6 @@ function DashBoard(outerProps: MyProps) {
       </div>
     );
   }
-  
-const mapStateToProps = (state: MarketSummaryResponse) => {
-  return {
-    marketSummaryResponse: state
-  }
-}
 
-const mapDispatchToProps = () => {
-  return {
-    getMarketSummery: () => getMarketSummery()
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(DashBoard);
+  export default DashBoard;
   
