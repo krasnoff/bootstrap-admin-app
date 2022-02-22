@@ -40,6 +40,10 @@ function Graph() {
 
     useEffect(() => {
         buildGraph([5, 10, 12]);
+
+        d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered_comma.csv").then(res => {
+            console.log('data from csv', res);
+        })
     });
     
     return (<div className={styles.svg}>
