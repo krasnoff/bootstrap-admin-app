@@ -9,6 +9,7 @@ import { getErrorSummery } from '../../Store/Actions/ErrorSummary';
 import ComponentWrapper from '../../components/General/ComponentWrapper/ComponentWrapper';
 import GeneralProfile from './GeneralProfile/GeneralProfile';
 import { getChart } from '../../Store/Actions/ChartSummery';
+import Graph from '../../components/General/Graph/Graph';
 
 function CompanyReview() {
     const data = useSelector(state => state);
@@ -60,6 +61,9 @@ function CompanyReview() {
             assetProfile={(data as any).QuoteSummary.quoteSummeryResponse?.quoteSummary.result[0].assetProfile}
             quoteType={(data as any).QuoteSummary.quoteSummeryResponse?.quoteSummary.result[0].quoteType}
           ></GeneralProfile>
+        </ComponentWrapper>
+        <ComponentWrapper title='Chart'>
+          <Graph></Graph>
         </ComponentWrapper>
         </div>
         : null }
