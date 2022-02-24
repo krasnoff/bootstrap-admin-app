@@ -33,7 +33,7 @@ function CompanyReview() {
     // get chart data
     useEffect(() => {
       if (JSON.stringify(previousChartRef.current) !== JSON.stringify((data as any).ChartReducer.chartSummary)) {
-        console.log('data', data);
+        // console.log('data', data);
         previousChartRef.current = (data as any).ChartReducer.chartSummary;
       }
     });  
