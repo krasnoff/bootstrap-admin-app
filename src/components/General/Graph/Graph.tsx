@@ -1,11 +1,11 @@
 import styles from './Graph.module.scss';
 import * as d3 from 'd3';
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 
 function Graph() {
     const d3Container = useRef(null);
 
-    const hardcodedData = 
+    const hardcodedData = useMemo(() =>
       [
         {
           date: new Date("1-May-12"),
@@ -111,26 +111,23 @@ function Graph() {
           date: new Date("26-Mar-12"),
           close: 606.98
         }
-       ]
+    ], []);
     
-    function buildGraph(data: Array<any>): void {
+    const handleBuildGraph = useCallback((data: Array<any>) => {
       const margin = {top: 30, right: 20, bottom: 30, left: 50},
       width = 600 - margin.left - margin.right,
       height = 270 - margin.top - margin.bottom;
 
-      // Set the ranges
-          
       const svg = d3.select(d3Container.current)
         .attr("width", width)
         .attr("height", height)
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
 
+      svg.select("g").remove();
+
       const dateArray = data.map(el => el.date);
       const valArray = data.map(el => el.close);
-
-      console.log(valArray)
-      console.log(Math.max(...valArray))
 
       const x = d3.scaleTime()
         .domain([dateArray[dateArray.length - 1], dateArray[0]])
@@ -153,18 +150,14 @@ function Graph() {
       g.append("path")
         .attr("class", "y axis")
         .attr("d", valueline(hardcodedData));
-    }
+    }, [hardcodedData]);
 
     useEffect(() => {
-        buildGraph(hardcodedData);
-
-        // d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered_comma.csv").then(res => {
-        //     console.log('data from csv', res);
-        // })
-    });
+      handleBuildGraph(hardcodedData);
+    }, [hardcodedData, handleBuildGraph]);
     
     return (<div className={styles.svg}>
-        <svg className="container" ref={d3Container} width="600" height="270"></svg>
+        <svg className={styles.container} ref={d3Container}></svg>
     </div>)
 }
 

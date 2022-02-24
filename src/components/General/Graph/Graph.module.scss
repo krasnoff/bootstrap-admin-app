@@ -1,13 +1,7 @@
-.svg {
-    svg {
-        rect {
-            fill: orange;
-        }
-  
-        text {
-            fill: white;
-            font: 10px sans-serif;
-            text-anchor: end;
-        }
+.container {
+    path { 
+        stroke: steelblue;
+        stroke-width: 2;
+        fill: none;
     }
-  }
+}
