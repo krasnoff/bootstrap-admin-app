@@ -114,18 +114,22 @@ function Graph() {
     ], []);
     
     const handleBuildGraph = useCallback((data: Array<any>) => {
+      // set graph size
       const margin = {top: 30, right: 20, bottom: 30, left: 50},
       width = 600 - margin.left - margin.right,
       height = 270 - margin.top - margin.bottom;
 
+      // set svg element
       const svg = d3.select(d3Container.current)
         .attr("width", width)
         .attr("height", height)
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
 
+      // remove prevoius graph
       svg.select("g").remove();
 
+      // set scale (min max)
       const dateArray = data.map(el => el.date);
       const valArray = data.map(el => el.close);
 
@@ -144,12 +148,23 @@ function Graph() {
             return y(d.close);
         });
 
+      // append g element
       const g = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
       
+      // append the line itself
       g.append("path")
         .attr("class", "y axis")
         .attr("d", valueline(hardcodedData));
+
+      // now write x axis
+      svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+
+      // now write y axis
+      svg.append("g")
+        .call(d3.axisLeft(y));
     }, [hardcodedData]);
 
     useEffect(() => {
