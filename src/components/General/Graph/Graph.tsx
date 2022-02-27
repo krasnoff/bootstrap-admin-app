@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef } from 'react';
 
 function Graph() {
     const d3Container = useRef(null);
+    const wrapperDiv = useRef<HTMLDivElement>(null);
 
     const hardcodedData = useMemo(() =>
       [
@@ -113,21 +114,17 @@ function Graph() {
         }
     ], []);
     
-    const handleBuildGraph = useCallback((data: Array<any>) => {
+    const handleBuildGraph = useCallback((data: Array<any>, width, height) => {
       // set graph size
-      const margin = {top: 30, right: 20, bottom: 30, left: 50},
-      width = 600 - margin.left - margin.right,
-      height = 270 - margin.top - margin.bottom;
+      const margin = {top: 0, right: 20, bottom: 20, left: 30}
 
       // set svg element
       const svg = d3.select(d3Container.current)
         .attr("width", width)
-        .attr("height", height)
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
+        .attr("height", height - 10)
 
       // remove prevoius graph
-      svg.select("g").remove();
+      svg.selectAll("g").remove();
 
       // set scale (min max)
       const dateArray = data.map(el => el.date);
@@ -150,7 +147,7 @@ function Graph() {
 
       // append g element
       const g = svg.append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+        .attr("transform", "translate(" + margin.left + "," + 0 + ")")
       
       // append the line itself
       g.append("path")
@@ -159,19 +156,22 @@ function Graph() {
 
       // now write x axis
       svg.append("g")
-        .attr("transform", "translate(0," + height + ")")
+        .attr("class", styles.axis)
+        .attr("transform", "translate(0," + (height - margin.bottom) + ")")
         .call(d3.axisBottom(x));
 
       // now write y axis
       svg.append("g")
+        .attr("class", styles.axis)
+        .attr("transform", "translate(" + margin.left + ",0)")
         .call(d3.axisLeft(y));
     }, [hardcodedData]);
 
     useEffect(() => {
-      handleBuildGraph(hardcodedData);
+      handleBuildGraph(hardcodedData, wrapperDiv.current ? wrapperDiv.current.offsetWidth : 0, wrapperDiv.current ? wrapperDiv.current.offsetHeight : 0);
     }, [hardcodedData, handleBuildGraph]);
     
-    return (<div className={styles.svg}>
+    return (<div className={styles.svg} ref={wrapperDiv}>
         <svg className={styles.container} ref={d3Container}></svg>
     </div>)
 }
