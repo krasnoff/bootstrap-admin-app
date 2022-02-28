@@ -10,11 +10,14 @@ import ComponentWrapper from '../../components/General/ComponentWrapper/Componen
 import GeneralProfile from './GeneralProfile/GeneralProfile';
 import { getChart } from '../../Store/Actions/ChartSummery';
 import Graph from '../../components/General/Graph/Graph';
+import { useFormatChartData } from '../../hooks/useFormatChartData';
+import { ChartSummaryGraphParameters } from '../../Types/Store/ChartSummaryGraphParameters';
 
 function CompanyReview() {
     const data = useSelector(state => state);
     let searchParams = useParams();
     const dispatch = useDispatch();
+    const formatChartSummary = useFormatChartData();
 
     const previousErrorDescriptionRef = useRef((data as any).QuoteSummary.quoteSummeryResponse?.quoteSummary?.error?.description);
     const previousChartRef = useRef((data as any).chartSummary);
@@ -33,10 +36,13 @@ function CompanyReview() {
     // get chart data
     useEffect(() => {
       if (JSON.stringify(previousChartRef.current) !== JSON.stringify((data as any).ChartReducer.chartSummary)) {
-        // console.log('data', data);
+        console.log('data', (data as any).ChartReducer.chartSummary);
         previousChartRef.current = (data as any).ChartReducer.chartSummary;
+        console.log('res', previousChartRef.current);
+        const res = formatChartSummary((data as any).ChartReducer.chartSummary, ChartSummaryGraphParameters.Adjclose)
+        console.log('chartSummary', res)
       }
-    });  
+    }, [data]);  
 
     // get error data
     useEffect(() => {
