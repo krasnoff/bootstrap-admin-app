@@ -14,7 +14,7 @@ export interface Adjclose {
 
 export interface Indicators {
     quote: Array<Quote>,
-    adjclose: Adjclose
+    adjclose: Array<number>
 }
 
 export interface comparisonsElement {
