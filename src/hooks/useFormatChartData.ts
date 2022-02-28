@@ -1,6 +1,6 @@
 import { ChartSummaryGraphFormatObj } from "../Types/Store/ChartSummaryGraphFormat";
 import { ChartSummaryGraphParameters } from "../Types/Store/ChartSummaryGraphParameters";
-import { Chart, Result } from "../Types/Store/ChartSummery";
+import { Chart } from "../Types/Store/ChartSummery";
 
 export function useFormatChartData() {
     
@@ -30,28 +30,28 @@ export function useFormatChartData() {
     
     
     
-    const formatChartSummary = (chartObj: any, parameters: ChartSummaryGraphParameters) => {
+    const formatChartSummary = (chartObj: Chart, parameters: ChartSummaryGraphParameters) => {
         let res: Array<ChartSummaryGraphFormatObj> = [];
         
-        if (chartObj.chart && chartObj.chart.result.length > 0) {
+        if (chartObj && chartObj.result.length > 0) {
             switch(parameters) {
                 case ChartSummaryGraphParameters.Adjclose:
-                    res = buildChartSummary(ChartSummaryGraphParameters.Adjclose, chartObj.chart.result[0]);
+                    res = buildChartSummary(ChartSummaryGraphParameters.Adjclose, chartObj.result[0]);
                     break;
                 case ChartSummaryGraphParameters.Close:
-                    res = buildChartSummary(ChartSummaryGraphParameters.Close, chartObj.chart.result[0]);
+                    res = buildChartSummary(ChartSummaryGraphParameters.Close, chartObj.result[0]);
                     break;
                 case ChartSummaryGraphParameters.High:
-                    res = buildChartSummary(ChartSummaryGraphParameters.High, chartObj.chart.result[0]);
+                    res = buildChartSummary(ChartSummaryGraphParameters.High, chartObj.result[0]);
                     break;
                 case ChartSummaryGraphParameters.Low:
-                    res = buildChartSummary(ChartSummaryGraphParameters.Low, chartObj.chart.result[0]);
+                    res = buildChartSummary(ChartSummaryGraphParameters.Low, chartObj.result[0]);
                     break;
                 case ChartSummaryGraphParameters.Open:
-                    res = buildChartSummary(ChartSummaryGraphParameters.Open, chartObj.chart.result[0]);
+                    res = buildChartSummary(ChartSummaryGraphParameters.Open, chartObj.result[0]);
                     break;
                 case ChartSummaryGraphParameters.Volume:
-                    res = buildChartSummary(ChartSummaryGraphParameters.Volume, chartObj.chart.result[0]);
+                    res = buildChartSummary(ChartSummaryGraphParameters.Volume, chartObj.result[0]);
                     break;
             }
         }
