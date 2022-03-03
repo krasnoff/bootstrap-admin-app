@@ -2,6 +2,7 @@ import styles from './Graph.module.scss';
 import * as d3 from 'd3';
 import { useCallback, useEffect, useRef } from 'react';
 import { ChartSummaryGraphFormatObj } from '../../../Types/Store/ChartSummaryGraphFormat';
+import { bisect } from 'd3';
 
 interface MyProps {
   data: Array<ChartSummaryGraphFormatObj>
@@ -42,12 +43,55 @@ function Graph(props: MyProps) {
         })
         .y0(y(0))
         .y1(function (d) {
-            return y(d.value);
+            return y(d.value)
+        
         });
 
       // append g element
       const g = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + 0 + ")")
+        .on('mouseover', (arg: MouseEvent) => mouseOverHandle(arg))
+        .on('mousemove', (arg: MouseEvent) => mouseMoveHandle(arg, data))
+        .on('mouseout', (arg: MouseEvent) => mouseOutHandle(arg));
+
+      const mouseOverHandle = (args: MouseEvent) => {
+        focus.style("opacity", 1);
+        focusText.style("opacity", 1);
+      }
+
+      const mouseMoveHandle = (args: MouseEvent, data: Array<ChartSummaryGraphFormatObj>) => {
+        const x0 = x.invert(args.offsetX - margin.left);
+        const i = bisect(data.map(el => el.date), x0);
+        focus
+          .attr("cx", args.offsetX)
+          .attr("cy", y(data[i].value))
+        focusText
+          .html("x:" + data[i].date.toLocaleDateString() + "  -  " + "y:" + data[i].value.toFixed(2))
+          .attr("x", args.offsetX + 15)
+          .attr("y", y(data[i].value))
+      }
+
+      const mouseOutHandle = (args: MouseEvent) => {
+        focus.style("opacity", 0);
+        focusText.style("opacity", 0);
+      }
+
+      // Create the text that travels along the curve of chart
+      const focusText = svg
+      .append('g')
+      .append('text')
+        .style("opacity", 0)
+        .attr("text-anchor", "left")
+        .attr("alignment-baseline", "middle")
+
+      // Create the circle that travels along the curve of chart
+      const focus = svg
+      .append('g')
+      .append('circle')
+        .style("fill", "none")
+        .attr("stroke", "black")
+        .attr('r', 8.5)
+        .style("opacity", 0)
       
       // append the line itself
       g.append("path")
@@ -65,6 +109,8 @@ function Graph(props: MyProps) {
         .attr("class", styles.axis)
         .attr("transform", "translate(" + margin.left + ",0)")
         .call(d3.axisLeft(y));
+
+      
     }, [props.data]);
 
     useEffect(() => {
