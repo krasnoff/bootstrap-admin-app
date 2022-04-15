@@ -66,7 +66,7 @@ function Graph(props: MyProps) {
           .attr("cx", args.offsetX)
           .attr("cy", y(data[i].value))
         focusText
-          .html("x:" + data[i].date.toLocaleDateString() + "  -  " + "y:" + data[i].value.toFixed(2))
+          .html(`x:${ data[i].date.toLocaleDateString()}  -  y:${data[i].value.toFixed(2)}`)
           .attr("x", args.offsetX + 15)
           .attr("y", y(data[i].value))
       }
