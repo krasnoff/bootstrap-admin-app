@@ -8,6 +8,7 @@ import Header from './components/Header/header';
 import Nav from './components/Navigator/navigator';
 import CompanyReview from './pages/CompanyReview/CompanyReview';
 import DashBoard from './pages/Dashboard/Dashboard';
+import FormComponent from './pages/Form/Form';
 import NoMatch from './pages/NoMatch/NoMatch';
 
 interface MyProps {
@@ -37,6 +38,7 @@ function App(props: MyProps) {
           <Routes>
             <Route path="/" element={<DashBoard />} />
             <Route path="/Dashboard" element={<DashBoard />} />
+            <Route path="/Form" element={<FormComponent />} />
             <Route path="/companyReview/:companySymbol" element={<CompanyReview />} />
             <Route path="*" element={<NoMatch />} />
           </Routes>

@@ -7,6 +7,7 @@ import MenuItemObj from './MenuItem/menuItem';
 import { MenuTypes } from '../../Types/Navigator/MenuTypes';
 import Seperator from './Seperator/seperator';
 import SubHeader from './SubHeader/subHeader';
+import { faWpforms } from '@fortawesome/free-brands-svg-icons';
 
 function Nav() {
     const MenuItems: Array<MainMenuItem> = [
@@ -29,6 +30,11 @@ function Nav() {
         title: 'Charts',
         url: 'charts',
         iconDefinition: faChartArea,
+        menuType: MenuTypes.MenuItem
+    },{
+        title: 'Form',
+        url: 'form',
+        iconDefinition: faWpforms,
         menuType: MenuTypes.MenuItem
     },{
         title: 'Component',
