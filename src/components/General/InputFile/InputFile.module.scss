@@ -34,6 +34,37 @@
     .fileUploadContent {
         display: none;
         text-align: center;
+
+        .fileUploadImage {
+            max-height: 200px;
+            max-width: 200px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .imageTitleWrap {
+            .removeImage {
+                width: 200px;
+                margin: 0;
+                color: #fff;
+                background: #cd4535;
+                border: none;
+                padding: 10px;
+                border-radius: 4px;
+                border-bottom: 4px solid #b02818;
+                transition: all .2s ease;
+                outline: none;
+                text-transform: uppercase;
+                font-weight: 700;
+
+                &:hover {
+                    background: #c13b2a;
+                    color: #ffffff;
+                    transition: all .2s ease;
+                    cursor: pointer;
+                }
+            }
+        }
     }
 
     .imageUploadWrap {
