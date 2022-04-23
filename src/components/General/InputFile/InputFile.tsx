@@ -6,8 +6,9 @@ function InputFile() {
     const fileUploadImage = useRef<HTMLImageElement>(null);
     const fileUploadContent = useRef<HTMLDivElement>(null);
     const imageTitle = useRef<HTMLSpanElement>(null);
-    // const fileUploadBtn = useRef<HTMLButtonElement>(null);
     const fileUploadInput = useRef<HTMLInputElement>(null);
+
+
 
     const readURL = (input: any) => {
         const files = input.target.files;
