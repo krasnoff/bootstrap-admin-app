@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/bootstrap-admin-app/static/css/main.4cbb92b1.chunk.css",
+    "main.js": "/bootstrap-admin-app/static/js/main.af483a3c.chunk.js",
+    "main.js.map": "/bootstrap-admin-app/static/js/main.af483a3c.chunk.js.map",
+    "runtime-main.js": "/bootstrap-admin-app/static/js/runtime-main.baad0205.js",
+    "runtime-main.js.map": "/bootstrap-admin-app/static/js/runtime-main.baad0205.js.map",
+    "static/js/2.ddac1858.chunk.js": "/bootstrap-admin-app/static/js/2.ddac1858.chunk.js",
+    "static/js/2.ddac1858.chunk.js.map": "/bootstrap-admin-app/static/js/2.ddac1858.chunk.js.map",
+    "static/js/3.98bad880.chunk.js": "/bootstrap-admin-app/static/js/3.98bad880.chunk.js",
+    "static/js/3.98bad880.chunk.js.map": "/bootstrap-admin-app/static/js/3.98bad880.chunk.js.map",
+    "index.html": "/bootstrap-admin-app/index.html",
+    "static/css/main.4cbb92b1.chunk.css.map": "/bootstrap-admin-app/static/css/main.4cbb92b1.chunk.css.map",
+    "static/js/2.ddac1858.chunk.js.LICENSE.txt": "/bootstrap-admin-app/static/js/2.ddac1858.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.baad0205.js",
+    "static/js/2.ddac1858.chunk.js",
+    "static/css/main.4cbb92b1.chunk.css",
+    "static/js/main.af483a3c.chunk.js"
+  ]
+}
