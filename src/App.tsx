@@ -37,9 +37,9 @@ function App(props: MyProps) {
           <Header></Header>
           <Routes>
             <Route path="/" element={<DashBoard />} />
-            <Route path="/Dashboard" element={<DashBoard />} />
-            <Route path="/Form" element={<FormComponent />} />
-            <Route path="/companyReview/:companySymbol" element={<CompanyReview />} />
+            <Route path="Dashboard" element={<DashBoard />} />
+            <Route path="Form" element={<FormComponent />} />
+            <Route path="companyReview/:companySymbol" element={<CompanyReview />} />
             <Route path="*" element={<NoMatch />} />
           </Routes>
         </div>
