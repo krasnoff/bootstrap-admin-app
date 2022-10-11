@@ -5,7 +5,7 @@ function Footer() {
         <footer className={styles.stickyFooter}>
           <div className={styles.container}>
               <div className={[styles.copyright, 'text-center'].join(' ')}>
-                  <span>Copyright © Kobi Krasnoff Website 2021</span>
+                  <span>Created by Kobi Krasnoff - original UI design by https://startbootstrap.com/</span>
               </div>
           </div>
         </footer>
