@@ -3,7 +3,7 @@ import stylesText from '../../css/texts.module.scss';
 import stylesMargins from '../../css/margins.module.scss';
 import ComponentWrapper from '../../components/General/ComponentWrapper/ComponentWrapper';
 import InputForm from '../../components/General/InputFile/InputFile';
-import SimpleForm from '../../components/General/SimpleForm/simpleFile';
+import SimpleForm from '../../components/General/SimpleForm/simpleForm';
 
 
 function FormComponent() {
