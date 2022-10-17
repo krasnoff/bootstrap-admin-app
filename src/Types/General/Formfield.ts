@@ -1,4 +1,3 @@
-import { MandatoryTypes } from "../../Enums/MandatoryTypes";
 import { MandatoryObj } from "./ManDatoryObj";
 
 export interface FormFieldInteface {

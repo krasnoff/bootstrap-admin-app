@@ -30,6 +30,7 @@ function SimpleForm() {
     }
 
     const NumbersOnly = (evt: any) => {
+        console.log('evt.key', evt.key);
         if (isNaN(evt.key)) {
             evt.preventDefault();
         }
