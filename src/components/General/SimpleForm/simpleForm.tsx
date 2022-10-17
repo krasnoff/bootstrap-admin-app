@@ -5,17 +5,17 @@ import { SimpleFormInteface } from '../../../Types/General/SimpleFormInterface';
 import styles from './InputFile.module.scss';
 
 function SimpleForm() {
-    const {convertObjectToArray, setFormState} = useFormUtilities();
+    const {setFormState} = useFormUtilities();
     
     const [inputs, setInputs] = useState<SimpleFormInteface>({
-        email: {fieldName: 'email', mandatoryTypes: [MandatoryTypes.required, MandatoryTypes.Regex], mandatoryArgs: new RegExp(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g)},
-        comments: {fieldName: 'comments', mandatoryTypes: [MandatoryTypes.required]},
+        email: {fieldName: 'email', mandatoryObjArr: [{mandatoryType: MandatoryTypes.required}, {mandatoryType: MandatoryTypes.Regex, mandatoryArg: new RegExp(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g)}]},
+        comments: {fieldName: 'comments', mandatoryObjArr: [{mandatoryType: MandatoryTypes.required}]},
         chooseRadio: {fieldName: 'chooseRadio'},
-        IDNumber: {fieldName: 'IDNumber', mandatoryTypes: [MandatoryTypes.required]},
+        IDNumber: {fieldName: 'IDNumber', mandatoryObjArr: [{mandatoryType: MandatoryTypes.required}]},
         chooseColor: {fieldName: 'chooseColor'},
-        exampleDataList: {fieldName: 'datalistOptions', mandatoryTypes:[MandatoryTypes.required]},
+        exampleDataList: {fieldName: 'datalistOptions', mandatoryObjArr: [{mandatoryType: MandatoryTypes.required}]},
         checkThisbox: {fieldName: 'checkThisbox'},
-        chooseNumber: {fieldName: 'chooseNumber', mandatoryTypes:[MandatoryTypes.required]},
+        chooseNumber: {fieldName: 'chooseNumber', mandatoryObjArr: [{mandatoryType: MandatoryTypes.required}]},
         exampleRange: {fieldName: 'exampleRange'}
     });
     
@@ -27,7 +27,12 @@ function SimpleForm() {
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const oldinputs = setFormState(event, inputs);
         setInputs(oldinputs);
-        // console.log('oldinputs', oldinputs)
+    }
+
+    const NumbersOnly = (evt: any) => {
+        if (isNaN(evt.key)) {
+            evt.preventDefault();
+        }
     }
     
     return (
@@ -63,7 +68,7 @@ function SimpleForm() {
             <div className="col-6">
                 <div className="mb-3">
                     <label htmlFor="IDNumber" className="form-label">IDNumber</label>
-                    <input type="text" className="form-control" name="IDNumber" id="IDNumber" placeholder="IDNumber" aria-label="IDNumber" aria-describedby="basic-addon1" value={inputs.chooseColor.value} onChange={changeHandler} />
+                    <input type="text" className="form-control" name="IDNumber" id="IDNumber" placeholder="IDNumber" aria-label="IDNumber" value={inputs.chooseColor.value} onChange={changeHandler} maxLength={9} onKeyDown={NumbersOnly} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="chooseColor" className="form-label">Choose color</label>

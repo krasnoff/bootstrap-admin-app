@@ -19,7 +19,7 @@ test('test return date diff hook', () => {
     checkDate = new Date();
     checkDate = new Date(checkDate.getFullYear(), checkDate.getMonth() - 1, checkDate.getDate(), checkDate.getHours(), checkDate.getMinutes(), checkDate.getSeconds(), 0);
     rerender({ initialValue: checkDate })
-    expect(result.current).toBe('1m');
+    expect(result.current).toBe('30d');
 
     // day
     checkDate = new Date();

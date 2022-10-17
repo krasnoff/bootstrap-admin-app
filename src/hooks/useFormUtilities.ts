@@ -1,13 +1,55 @@
 import { useState } from "react";
+import { MandatoryTypes } from "../Enums/MandatoryTypes";
+import { FormFieldInteface } from "../Types/General/Formfield";
+import { MandatoryObj } from "../Types/General/ManDatoryObj";
 import { SimpleFormInteface } from "../Types/General/SimpleFormInterface";
 
 export function useFormUtilities() {
-    const [res, setRes] = useState<boolean>();
+    const [notValidresult, setNotValidresult] = useState<boolean>();
 
     const convertObjectToArray = (obj: any) => {
         Object.keys(obj).forEach(key => {
             console.log(key, obj[key]);
         })
+    }
+
+    const validateElement = (mandatoryObj: MandatoryObj, value: string | number | undefined): boolean => {
+        let isNotValid = false;
+        if (mandatoryObj.mandatoryType === MandatoryTypes.required) {
+            if (value === undefined || value === null || value === '') {
+                isNotValid = true;
+            }
+        } else if (mandatoryObj.mandatoryType === MandatoryTypes.Regex) {
+            if (mandatoryObj.mandatoryArg && mandatoryObj.mandatoryArg instanceof RegExp) {
+                if (!mandatoryObj.mandatoryArg.test(value as string)) {
+                    isNotValid = true;
+                }
+            } else {
+                isNotValid = true;
+            }
+        } else if (mandatoryObj.mandatoryType === MandatoryTypes.rangeMaximum) {
+            if (value && value !== '' && !isNaN(value as number) && !isNaN(mandatoryObj.mandatoryArg as number)) {
+                if ((value as number) > (mandatoryObj.mandatoryArg as number)) {
+                    isNotValid = true;
+                }
+            } else {
+                isNotValid = true;
+            }
+        } else if (mandatoryObj.mandatoryType === MandatoryTypes.rangeMinimum) {
+            if (value && value !== '' && !isNaN(value as number) && !isNaN(mandatoryObj.mandatoryArg as number)) {
+                if ((value as number) < (mandatoryObj.mandatoryArg as number)) {
+                    isNotValid = true;
+                }
+            } else {
+                isNotValid = true;
+            }
+        } else if (mandatoryObj.mandatoryType === MandatoryTypes.userDefined) {
+            if (mandatoryObj.mandatoryArg instanceof Function) {
+                isNotValid = (mandatoryObj.mandatoryArg as Function)(value);
+            }
+        }
+        setNotValidresult(isNotValid);
+        return isNotValid;
     }
 
     const setFormState = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>, inputs: SimpleFormInteface) => {
@@ -20,11 +62,20 @@ export function useFormUtilities() {
             const formName = event.target.name;
             if ((inputs as any)[formName]) {
                 (inputs as any)[formName].value = event.target.value;
+
+                // TODO check validation
+                const element: FormFieldInteface = (inputs as any)[formName];
+                console.log('element', element);
+
+                element.isNotValid = false;
+                element.mandatoryObjArr?.forEach(el => {
+                    validateElement(el, element.value);
+                });
             }
         }
 
         return inputs;
     }
 
-    return { convertObjectToArray, setFormState }
+    return { setFormState, validateElement, notValidresult }
 }
