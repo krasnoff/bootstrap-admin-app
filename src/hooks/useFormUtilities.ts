@@ -68,8 +68,9 @@ export function useFormUtilities() {
                 console.log('element', element);
 
                 element.isNotValid = false;
-                element.mandatoryObjArr?.forEach(el => {
+                element.mandatoryObjArr?.every(el => {
                     element.isNotValid = validateElement(el, element.value);
+                    return !element.isNotValid;
                 });
             }
         }
