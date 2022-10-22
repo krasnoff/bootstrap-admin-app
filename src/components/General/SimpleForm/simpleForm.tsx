@@ -1,32 +1,33 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MandatoryTypes } from '../../../Enums/MandatoryTypes';
 import { useFormUtilities } from '../../../hooks/useFormUtilities';
 import { SimpleFormInteface } from '../../../Types/General/SimpleFormInterface';
 import styles from './InputFile.module.scss';
 
 function SimpleForm() {
-    const {setFormState} = useFormUtilities();
+    const {setFormState, isValidIsraeliID} = useFormUtilities();
     
-    const [inputs, setInputs] = useState<SimpleFormInteface>({
-        email: {fieldName: 'email', mandatoryObjArr: [{mandatoryType: MandatoryTypes.required}, {mandatoryType: MandatoryTypes.Regex, mandatoryArg: new RegExp(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g)}]},
-        comments: {fieldName: 'comments', mandatoryObjArr: [{mandatoryType: MandatoryTypes.required}]},
+    const [complexInputs, setComplexInputs] = useState<SimpleFormInteface>({
+        email: {fieldName: 'email', value: '', mandatoryObjArr: [{mandatoryType: MandatoryTypes.required}, {mandatoryType: MandatoryTypes.Regex, mandatoryArg: new RegExp(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g)}]},
+        comments: {fieldName: 'comments', value: '', mandatoryObjArr: [{mandatoryType: MandatoryTypes.required}]},
         chooseRadio: {fieldName: 'chooseRadio'},
-        IDNumber: {fieldName: 'IDNumber', mandatoryObjArr: [{mandatoryType: MandatoryTypes.required}]},
+        IDNumber: {fieldName: 'IDNumber', mandatoryObjArr: [{mandatoryType: MandatoryTypes.required}, {mandatoryType: MandatoryTypes.userDefined, mandatoryArg: isValidIsraeliID}]},
         chooseColor: {fieldName: 'chooseColor'},
-        exampleDataList: {fieldName: 'datalistOptions', mandatoryObjArr: [{mandatoryType: MandatoryTypes.required}]},
+        exampleDataList: {fieldName: 'datalistOptions', value: '', mandatoryObjArr: [{mandatoryType: MandatoryTypes.required}]},
         checkThisbox: {fieldName: 'checkThisbox'},
         chooseNumber: {fieldName: 'chooseNumber', mandatoryObjArr: [{mandatoryType: MandatoryTypes.required}]},
         exampleRange: {fieldName: 'exampleRange'}
     });
+
+    const [inputs, setInputs] = useState<any>({});
     
     const handleSubmit = (event: any) => {
         event.preventDefault();
-        console.log('handleSubmit', event)
+        console.log('inputs:', inputs)
     }
 
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        const oldinputs = setFormState(event, inputs);
-        setInputs(oldinputs);
+        setInputs((values: any) => ({...values, [event.target.name]: event.target.value}));
     }
 
     const NumbersOnly = (evt: any) => {
@@ -40,11 +41,11 @@ function SimpleForm() {
             <div className="col-6">
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">Email address</label>
-                    <input type="email" className="form-control" name="email" id="email" placeholder="name@example.com" value={inputs.email.value} onChange={changeHandler} />
+                    <input type="email" className="form-control" name="email" id="email" placeholder="name@example.com" value={inputs.email || ""} onChange={changeHandler} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="comments" className="form-label">Example textarea</label>
-                    <textarea className="form-control" name="comments" id="comments" rows={3} value={inputs.comments.value} onChange={changeHandler}></textarea>
+                    <textarea className="form-control" name="comments" id="comments" rows={3} value={inputs.comments || ""} onChange={changeHandler}></textarea>
                 </div>
                 <div className="mb-3">
                     <div className="form-check">
@@ -62,21 +63,21 @@ function SimpleForm() {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="exampleRange" className="form-label">Example range</label>
-                    <input type="range" className="form-range" id="exampleRange" name="exampleRange" value={inputs.exampleRange.value} onChange={changeHandler} />
+                    <input type="range" className="form-range" id="exampleRange" name="exampleRange" value={inputs.exampleRange || ""} onChange={changeHandler} />
                 </div>
             </div>
             <div className="col-6">
                 <div className="mb-3">
                     <label htmlFor="IDNumber" className="form-label">IDNumber</label>
-                    <input type="text" className="form-control" name="IDNumber" id="IDNumber" placeholder="IDNumber" aria-label="IDNumber" value={inputs.chooseColor.value} onChange={changeHandler} maxLength={9} onKeyDown={NumbersOnly} />
+                    <input type="text" className="form-control" name="IDNumber" id="IDNumber" placeholder="IDNumber" aria-label="IDNumber" value={inputs.IDNumber || ""} onChange={changeHandler} maxLength={9} onKeyDown={NumbersOnly} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="chooseColor" className="form-label">Choose color</label>
-                    <input type="color" className="form-control form-control-color" name="chooseColor" id="chooseColor" title="Choose your color" value={inputs.chooseColor.value} onChange={changeHandler} />
+                    <input type="color" className="form-control form-control-color" name="chooseColor" id="chooseColor" title="Choose your color" value={inputs.chooseColor || "#000000"} onChange={changeHandler} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="exampleDataList" className="form-label">Datalist example</label>
-                    <input className="form-control" list="datalistOptions" name="exampleDataList" id="exampleDataList" placeholder="Type to search..." value={inputs.exampleDataList.value} onChange={changeHandler} />
+                    <input className="form-control" list="datalistOptions" name="exampleDataList" id="exampleDataList" placeholder="Type to search..." value={inputs.exampleDataList || ""} onChange={changeHandler} />
                     <datalist id="datalistOptions">
                         <option value="San Francisco"/>
                         <option value="New York"/>
@@ -87,7 +88,7 @@ function SimpleForm() {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="chooseNumber" className="form-label">Choose number</label>
-                    <select className="form-select" aria-label="Default select example" name="chooseNumber" id="chooseNumber" value={inputs.chooseNumber.value} onChange={changeHandler}>
+                    <select className="form-select" aria-label="Default select example" name="chooseNumber" id="chooseNumber" value={inputs.chooseNumber || ""} onChange={changeHandler}>
                         <option value="">Open this select menu</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
@@ -96,7 +97,7 @@ function SimpleForm() {
                 </div>
                 <div className="mb-3">
                     <div className="form-check">
-                        <input className="form-check-input" type="checkbox" name="checkThisbox" id="checkThisbox" checked={inputs.checkThisbox.checked} onChange={changeHandler} />
+                        <input className="form-check-input" type="checkbox" name="checkThisbox" id="checkThisbox" checked={inputs.checkThisbox || ""} onChange={changeHandler} />
                         <label className="form-check-label" htmlFor="checkThisbox">
                             Default checkbox
                         </label>
