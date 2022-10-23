@@ -1,19 +1,20 @@
 import { useEffect, useState } from 'react';
 import { MandatoryTypes } from '../../../Enums/MandatoryTypes';
 import { useFormUtilities } from '../../../hooks/useFormUtilities';
+import { MandatoryObj } from '../../../Types/General/ManDatoryObj';
 import { SimpleFormInteface } from '../../../Types/General/SimpleFormInterface';
 import styles from './InputFile.module.scss';
 
 function SimpleForm() {
-    const {setFormState, isValidIsraeliID} = useFormUtilities();
+    const {setFormState, isValidIsraeliID, validateElement} = useFormUtilities();
     
     const [complexInputs, setComplexInputs] = useState<SimpleFormInteface>({
-        email: {fieldName: 'email', value: '', mandatoryObjArr: [{mandatoryType: MandatoryTypes.required}, {mandatoryType: MandatoryTypes.Regex, mandatoryArg: new RegExp(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g)}]},
-        comments: {fieldName: 'comments', value: '', mandatoryObjArr: [{mandatoryType: MandatoryTypes.required}]},
+        email: {fieldName: 'email',  mandatoryObjArr: [{mandatoryType: MandatoryTypes.required}, {mandatoryType: MandatoryTypes.Regex, mandatoryArg: new RegExp(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/)}]},
+        comments: {fieldName: 'comments', mandatoryObjArr: [{mandatoryType: MandatoryTypes.required}]},
         chooseRadio: {fieldName: 'chooseRadio'},
         IDNumber: {fieldName: 'IDNumber', mandatoryObjArr: [{mandatoryType: MandatoryTypes.required}, {mandatoryType: MandatoryTypes.userDefined, mandatoryArg: isValidIsraeliID}]},
         chooseColor: {fieldName: 'chooseColor'},
-        exampleDataList: {fieldName: 'datalistOptions', value: '', mandatoryObjArr: [{mandatoryType: MandatoryTypes.required}]},
+        exampleDataList: {fieldName: 'datalistOptions', mandatoryObjArr: [{mandatoryType: MandatoryTypes.required}]},
         checkThisbox: {fieldName: 'checkThisbox'},
         chooseNumber: {fieldName: 'chooseNumber', mandatoryObjArr: [{mandatoryType: MandatoryTypes.required}]},
         exampleRange: {fieldName: 'exampleRange'}
@@ -24,10 +25,19 @@ function SimpleForm() {
     const handleSubmit = (event: any) => {
         event.preventDefault();
         console.log('inputs:', inputs)
+        console.log('complexInputs:', complexInputs)
     }
 
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setInputs((values: any) => ({...values, [event.target.name]: event.target.value}));
+
+        const simpleFormInteface = (complexInputs as any)[event.target.name];
+        if (simpleFormInteface) {
+            simpleFormInteface.mandatoryObjArr.forEach((el: MandatoryObj) => {
+                el.isNotValid = validateElement(el, event.target.value);
+            })
+            
+        }
     }
 
     const NumbersOnly = (evt: any) => {
