@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { MandatoryTypes } from '../../../Enums/MandatoryTypes';
 import { useFormUtilities } from '../../../hooks/useFormUtilities';
 import { MandatoryObj } from '../../../Types/General/ManDatoryObj';
 import { SimpleFormInteface } from '../../../Types/General/SimpleFormInterface';
-import styles from './InputFile.module.scss';
+// import styles from './InputFile.module.scss';
 
 function SimpleForm() {
-    const {setFormState, isValidIsraeliID, validateElement} = useFormUtilities();
+    const {isValidIsraeliID, validateElement} = useFormUtilities();
     
     const [complexInputs, setComplexInputs] = useState<SimpleFormInteface>({
         email: {fieldName: 'email',  mandatoryObjArr: [{mandatoryType: MandatoryTypes.required}, {mandatoryType: MandatoryTypes.Regex, mandatoryArg: new RegExp(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/)}]},
@@ -21,25 +21,25 @@ function SimpleForm() {
     });
 
     const [inputs, setInputs] = useState<any>({});
+    const [isSubmit, setIsSubmit] = useState<boolean>(false);
     
     const handleSubmit = (event: any) => {
         event.preventDefault();
-        console.log('inputs:', inputs)
-        console.log('complexInputs:', complexInputs)
+        setIsSubmit(true);
+        // console.log('inputs:', inputs)
+        // console.log('complexInputs:', complexInputs)
     }
 
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setInputs((values: any) => ({...values, [event.target.name]: event.target.value}));
 
         const simpleFormInteface = (complexInputs as any)[event.target.name];
-        if (simpleFormInteface) {
+        if (simpleFormInteface && simpleFormInteface.mandatoryObjArr) {
             simpleFormInteface.mandatoryObjArr.forEach((el: MandatoryObj) => {
                 el.isNotValid = validateElement(el, event.target.value);
             })
             
-        }
-        // setComplexInputs();
-        console.log('complexInputs:', complexInputs)
+        }        
         setComplexInputs(complexInputs);
     }
 
@@ -48,6 +48,14 @@ function SimpleForm() {
             evt.preventDefault();
         }
     }
+
+    const divStyleBlock = {
+        display: 'block'
+    };
+
+    const divStyleNone = {
+        display: 'none'
+    };
     
     return (
         <form className="row" onSubmit={(event) => handleSubmit(event)}>
@@ -55,6 +63,12 @@ function SimpleForm() {
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">Email address</label>
                     <input type="email" className="form-control" name="email" id="email" placeholder="name@example.com" value={inputs.email || ""} onChange={changeHandler} />
+                    <div className="invalid-feedback" style={isSubmit && (complexInputs.email.mandatoryObjArr as Array<MandatoryObj>)[0].isNotValid ? divStyleBlock : divStyleNone}>
+                        Mandatory field
+                    </div>
+                    <div className="invalid-feedback" style={isSubmit && (complexInputs.email.mandatoryObjArr as Array<MandatoryObj>)[1].isNotValid ? divStyleBlock : divStyleNone}>
+                        Email is not valid
+                    </div>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="comments" className="form-label">Example textarea</label>

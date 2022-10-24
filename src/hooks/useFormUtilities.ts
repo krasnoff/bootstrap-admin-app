@@ -1,17 +1,10 @@
 import { useState } from "react";
 import { MandatoryTypes } from "../Enums/MandatoryTypes";
-import { FormFieldInteface } from "../Types/General/Formfield";
 import { MandatoryObj } from "../Types/General/ManDatoryObj";
 import { SimpleFormInteface } from "../Types/General/SimpleFormInterface";
 
 export function useFormUtilities() {
     const [notValidresult, setNotValidresult] = useState<boolean>();
-
-    const convertObjectToArray = (obj: any) => {
-        Object.keys(obj).forEach(key => {
-            console.log(key, obj[key]);
-        })
-    }
 
     const isValidIsraeliID = (id: string) => {
         let strId = String(id).trim();
@@ -79,16 +72,6 @@ export function useFormUtilities() {
             const formName = event.target.name;
             if ((inputs as any)[formName]) {
                 (inputs as any)[formName].value = event.target.value;
-
-                // TODO check validation
-                const element: FormFieldInteface = (inputs as any)[formName];
-                // console.log('element', element);
-
-                // element.isNotValid = false;
-                // element.mandatoryObjArr?.every(el => {
-                //     element.isNotValid = validateElement(el, element.value);
-                //     return !element.isNotValid;
-                // });
             }
         }
 
