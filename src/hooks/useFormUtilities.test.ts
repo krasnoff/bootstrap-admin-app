@@ -56,7 +56,7 @@ test('test form validation function - regex 2', async () => {
     });
 
     act(() => {
-        result.current.validateElement({mandatoryType: MandatoryTypes.Regex, mandatoryArg: new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)}, undefined)
+        result.current.validateElement({mandatoryType: MandatoryTypes.Regex, mandatoryArg: new RegExp(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/)}, undefined)
     })
 
     expect(result.current.notValidresult).toBe(true);
@@ -68,7 +68,7 @@ test('test form validation function - regex 3', async () => {
     });
 
     act(() => {
-        result.current.validateElement({mandatoryType: MandatoryTypes.Regex, mandatoryArg: new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)}, 'krasnoff.kobi@gmail.com')
+        result.current.validateElement({mandatoryType: MandatoryTypes.Regex, mandatoryArg: new RegExp(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/)}, 'krasnoff.kobi@gmail.com')
     })
 
     expect(result.current.notValidresult).toBe(false);
@@ -80,7 +80,7 @@ test('test form validation function - regex 4', async () => {
     });
 
     act(() => {
-        result.current.validateElement({mandatoryType: MandatoryTypes.Regex, mandatoryArg: new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)}, 'kobikr@y-i.com')
+        result.current.validateElement({mandatoryType: MandatoryTypes.Regex, mandatoryArg: new RegExp(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/)}, 'kobikr@y-i.com')
     })
 
     expect(result.current.notValidresult).toBe(false);

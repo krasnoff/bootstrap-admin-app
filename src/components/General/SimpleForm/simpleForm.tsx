@@ -38,6 +38,9 @@ function SimpleForm() {
             })
             
         }
+        // setComplexInputs();
+        console.log('complexInputs:', complexInputs)
+        setComplexInputs(complexInputs);
     }
 
     const NumbersOnly = (evt: any) => {
