@@ -31,7 +31,12 @@ function SimpleForm() {
     }
 
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        setInputs((values: any) => ({...values, [event.target.name]: event.target.value}));
+        if (event.target instanceof HTMLInputElement && event.target.type === 'checkbox') {
+            setInputs((values: any) => ({...values, [event.target.name]: (event.target as any).checked}));
+        } else {
+            setInputs((values: any) => ({...values, [event.target.name]: event.target.value}));
+        }
+        
 
         const simpleFormInteface = (complexInputs as any)[event.target.name];
         if (simpleFormInteface && simpleFormInteface.mandatoryObjArr) {
@@ -73,6 +78,9 @@ function SimpleForm() {
                 <div className="mb-3">
                     <label htmlFor="comments" className="form-label">Example textarea</label>
                     <textarea className="form-control" name="comments" id="comments" rows={3} value={inputs.comments || ""} onChange={changeHandler}></textarea>
+                    <div className="invalid-feedback" style={isSubmit && (complexInputs.comments.mandatoryObjArr as Array<MandatoryObj>)[0].isNotValid ? divStyleBlock : divStyleNone}>
+                        Mandatory field
+                    </div>
                 </div>
                 <div className="mb-3">
                     <div className="form-check">
@@ -97,6 +105,12 @@ function SimpleForm() {
                 <div className="mb-3">
                     <label htmlFor="IDNumber" className="form-label">IDNumber</label>
                     <input type="text" className="form-control" name="IDNumber" id="IDNumber" placeholder="IDNumber" aria-label="IDNumber" value={inputs.IDNumber || ""} onChange={changeHandler} maxLength={9} onKeyDown={NumbersOnly} />
+                    <div className="invalid-feedback" style={isSubmit && (complexInputs.IDNumber.mandatoryObjArr as Array<MandatoryObj>)[0].isNotValid ? divStyleBlock : divStyleNone}>
+                        Mandatory field
+                    </div>
+                    <div className="invalid-feedback" style={isSubmit && (complexInputs.IDNumber.mandatoryObjArr as Array<MandatoryObj>)[1].isNotValid ? divStyleBlock : divStyleNone}>
+                        ID is not valid
+                    </div>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="chooseColor" className="form-label">Choose color</label>
