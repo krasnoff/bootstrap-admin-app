@@ -26,8 +26,8 @@ function SimpleForm() {
     const handleSubmit = (event: any) => {
         event.preventDefault();
         setIsSubmit(true);
-        // console.log('inputs:', inputs)
-        // console.log('complexInputs:', complexInputs)
+        
+        // TODO check validation to all componenets in form
     }
 
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
