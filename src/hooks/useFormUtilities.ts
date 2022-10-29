@@ -23,10 +23,10 @@ export function useFormUtilities() {
         return !(counter % 10 === 0);
     }
 
-    const validateElement = (mandatoryObj: MandatoryObj, value: string | number | undefined): boolean => {
+    const validateElement = (mandatoryObj: MandatoryObj, value: string | number | boolean | undefined): boolean => {
         let isNotValid = false;
         if (mandatoryObj.mandatoryType === MandatoryTypes.required) {
-            if (value === undefined || value === null || value === '') {
+            if (value === undefined || value === null || value === '' || value === false) {
                 isNotValid = true;
             }
         } else if (mandatoryObj.mandatoryType === MandatoryTypes.Regex) {
