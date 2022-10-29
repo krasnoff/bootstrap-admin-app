@@ -42,7 +42,7 @@ function Nav() {
         subMenuItem: {
             title: 'somthing',
             items: [{
-                title: 'sub menu 1',
+                title: 'Lazy Loading...',
                 url: 'SubMenu1'
             },{
                 title: 'sub menu 2',
