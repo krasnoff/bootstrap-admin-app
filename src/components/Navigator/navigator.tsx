@@ -43,10 +43,10 @@ function Nav() {
             title: 'somthing',
             items: [{
                 title: 'sub menu 1',
-                url: 'fffff'
+                url: 'SubMenu1'
             },{
                 title: 'sub menu 2',
-                url: 'ggggg'
+                url: 'SubMenu2'
             }]
         },
         menuType: MenuTypes.MenuItem

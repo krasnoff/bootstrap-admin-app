@@ -10,6 +10,8 @@ import CompanyReview from './pages/CompanyReview/CompanyReview';
 import DashBoard from './pages/Dashboard/Dashboard';
 import FormComponent from './pages/Form/Form';
 import NoMatch from './pages/NoMatch/NoMatch';
+import SubMenu1 from './pages/SubMenu1/SubMenu1';
+import SubMenu2 from './pages/SubMenu2/SubMenu2';
 
 interface MyProps {
   errorSummery?: any
@@ -40,6 +42,8 @@ function App(props: MyProps) {
             <Route path="/Dashboard" element={<DashBoard />} />
             <Route path="/Form" element={<FormComponent />} />
             <Route path="/companyReview/:companySymbol" element={<CompanyReview />} />
+            <Route path="/SubMenu1" element={<SubMenu1 />} />
+            <Route path="/SubMenu2" element={<SubMenu2 />} />
             <Route path="*" element={<NoMatch />} />
           </Routes>
         </div>
