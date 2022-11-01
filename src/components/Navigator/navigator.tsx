@@ -45,7 +45,7 @@ function Nav() {
                 title: 'Lazy Loading...',
                 url: 'SubMenu1'
             },{
-                title: 'sub menu 2',
+                title: 'Guarded page',
                 url: 'SubMenu2'
             }]
         },
@@ -53,7 +53,7 @@ function Nav() {
     }];
 
     const handleItemClick = (evt: any, el: SingleItem) => {
-        console.log('outer frame...', evt, el);
+        // console.log('outer frame...', evt, el);
     }
 
     const renderSwitch = (param: MainMenuItem, index: number) => {

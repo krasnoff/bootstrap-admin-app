@@ -4,11 +4,13 @@ import { connect } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import './App.scss';
 import Footer from './components/Footer/footer';
+import GuardedRoute, { GuardedRouteProps } from './components/General/GuardedRoute/GuardedRoute';
 import Header from './components/Header/header';
 import Nav from './components/Navigator/navigator';
 import CompanyReview from './pages/CompanyReview/CompanyReview';
 import DashBoard from './pages/Dashboard/Dashboard';
 import FormComponent from './pages/Form/Form';
+import Login from './pages/Login/Login';
 import NoMatch from './pages/NoMatch/NoMatch';
 import SubMenu1 from './pages/SubMenu1/SubMenu1';
 import SubMenu2 from './pages/SubMenu2/SubMenu2';
@@ -19,6 +21,7 @@ interface MyProps {
 
 function App(props: MyProps) {
   const [toastShow, setToastShow] = useState<boolean>(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
   const setShow = (isShow: boolean) => {
     setToastShow(false);
@@ -29,6 +32,11 @@ function App(props: MyProps) {
       setToastShow(true) 
     }    
   }, [props.errorSummery]);
+
+  const defaultProtectedRouteProps: Omit<GuardedRouteProps, 'outlet'> = {
+    isAuthenticated: isAuthenticated,
+    authenticationPath: '/login',
+  };
   
   return (
     
@@ -43,7 +51,8 @@ function App(props: MyProps) {
             <Route path="/Form" element={<FormComponent />} />
             <Route path="/companyReview/:companySymbol" element={<CompanyReview />} />
             <Route path="/SubMenu1" element={<SubMenu1 />} />
-            <Route path="/SubMenu2" element={<SubMenu2 />} />
+            <Route path="/SubMenu2" element={<GuardedRoute {...defaultProtectedRouteProps} outlet={<SubMenu2 />} />} />
+            <Route path="/Login" element={<Login />} />
             <Route path="*" element={<NoMatch />} />
           </Routes>
         </div>
