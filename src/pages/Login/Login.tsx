@@ -9,11 +9,12 @@ function Login() {
 
           <div className="container">
 
-              <div className="row justify-content-center">
+              
 
-                  <div className="col-xl-10 col-lg-12 col-md-9">
-
-                      <div className={[stylesLogin.card, 'o-hidden border-0 shadow-lg my-5'].join(' ')}>
+                  <div className={['col-xl-10 col-lg-12 col-md-9', stylesLogin.bgLoginBox].join(' ')}>
+                    <div className={['col-lg-6 h-100', stylesLogin.pic].join(' ')}></div>
+                    <div className={['col-lg-6 h-100', stylesLogin.form].join(' ')}>d</div>
+                      {/* <div className={[stylesLogin.card, 'o-hidden border-0 shadow-lg my-5'].join(' ')}>
                           <div className={stylesLogin.cardBody}>
                               <div className={stylesLogin.row}>
                                   <div className={['col-lg-6 d-none d-lg-block', stylesLogin.bgLoginImage].join(' ')}></div>
@@ -49,22 +50,21 @@ function Login() {
                                               <a href="index.html" className="btn btn-facebook btn-user btn-block">
                                                   <i className="fab fa-facebook-f fa-fw"></i> Login with Facebook
                                               </a>
-                                          </form>
-                                          <hr />
+                                          </form> */}
+                                          {/* <hr />
                                           <div className="text-center">
                                               <a className="small" href="forgot-password.html">Forgot Password?</a>
                                           </div>
                                           <div className="text-center">
                                               <a className="small" href="register.html">Create an Account!</a>
-                                          </div>
+                                          </div> 
                                       </div>
                                   </div>
                               </div>
                           </div>
-                      </div>
+                      </div>*/}
 
-                  </div>
-
+                  
               </div>
 
           </div>
