@@ -28,7 +28,55 @@
         }
 
         .form {
-            
+            .p5 {
+                padding: 3rem;
+
+                .textCenter {
+                    text-align: center;
+                }
+
+                .formGroup {
+                    margin-bottom: 1rem;
+
+                    .formControlLoginUser {
+                        display: block;
+                        width: 100%;
+                        height: calc(1.5em + 0.75rem + 2px);
+                        font-weight: 400;
+                        line-height: 1.5;
+                        color: #6e707e;
+                        background-color: #fff;
+                        background-clip: padding-box;
+                        border: 1px solid #d1d3e2;
+                        border-radius: 0.35rem;
+                        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+                        font-size: .8rem;
+                        border-radius: 10rem;
+                        padding: 1.5rem 1rem;
+                    }
+
+                    .checkboxWrapper {
+                        position: relative;
+                        z-index: 1;
+                        display: block;
+                        min-height: 1.5rem;
+                        padding-left: 1.5rem;
+                        font-size: 80%;
+                        font-weight: 400;
+
+                        .customControl {
+                            position: absolute;
+                            left: 0;
+                            z-index: -1;
+                            width: 1rem;
+                            height: 1.25rem;
+                            box-sizing: border-box;
+                            padding: 0;
+                            border-color: #c5c6cd;
+                        }
+                    }
+                }
+            }
         }
 
         // .card {
