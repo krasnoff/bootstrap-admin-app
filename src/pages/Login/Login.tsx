@@ -1,11 +1,21 @@
-import styles from '../pages.module.scss';
-import stylesText from '../../css/texts.module.scss';
-import stylesMargins from '../../css/margins.module.scss';
 import stylesLogin from './login.module.scss';
+import { useState } from 'react';
 
-function Login() {
+export interface Props {
+    onSuccessfullLogin: () => void
+}
+
+export function Login(props: Props) {
+    const [inputs, setInputs] = useState<any>({});
+
+    const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setInputs((values: any) => ({...values, [event.target.name]: event.target.value}));
+    }
+    
     const handleSubmit = (event: any) => {
         event.preventDefault();
+        // TODO check login validation here
+        props.onSuccessfullLogin();
     }
     
     return (
@@ -26,12 +36,12 @@ function Login() {
                                 <div  className={stylesLogin.formGroup}>
                                     <input type="email" className={['form-control form-control-user', stylesLogin.formControlLoginUser].join(' ')}
                                         id="exampleInputEmail" aria-describedby="emailHelp"
-                                        placeholder="Enter Email Address..." />
+                                        placeholder="Enter Email Address..." onChange={changeHandler} value={inputs.email || ""} name="email" />
                                 </div>
                                 <div  className={stylesLogin.formGroup}>
                                     <input type="password" className={['form-control form-control-user', stylesLogin.formControlLoginUser].join(' ')}
                                         id="exampleInputPassword" aria-describedby="emailHelp"
-                                        placeholder="Password" />
+                                        placeholder="Password" onChange={changeHandler} value={inputs.password || ""} name="password" />
                                 </div>
                                 <div  className={stylesLogin.formGroup}>
                                     <div className={stylesLogin.checkboxWrapper}>
@@ -59,5 +69,5 @@ function Login() {
     );
 }
   
-export default Login;
+
   

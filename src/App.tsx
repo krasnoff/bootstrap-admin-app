@@ -10,7 +10,7 @@ import Nav from './components/Navigator/navigator';
 import CompanyReview from './pages/CompanyReview/CompanyReview';
 import DashBoard from './pages/Dashboard/Dashboard';
 import FormComponent from './pages/Form/Form';
-import Login from './pages/Login/Login';
+import { Login } from './pages/Login/Login';
 import NoMatch from './pages/NoMatch/NoMatch';
 import SubMenu1 from './pages/SubMenu1/SubMenu1';
 import SubMenu2 from './pages/SubMenu2/SubMenu2';
@@ -37,6 +37,11 @@ function App(props: MyProps) {
     isAuthenticated: isAuthenticated,
     authenticationPath: '/login',
   };
+
+  const successfullLoginHandler = () => {
+    console.log('successfullLoginHandler');
+    setIsAuthenticated(true);
+  }
   
   return (
     
@@ -51,8 +56,8 @@ function App(props: MyProps) {
             <Route path="/Form" element={<FormComponent />} />
             <Route path="/companyReview/:companySymbol" element={<CompanyReview />} />
             <Route path="/SubMenu1" element={<SubMenu1 />} />
-            <Route path="/SubMenu2" element={<GuardedRoute {...defaultProtectedRouteProps} outlet={<SubMenu2 />} />} />
-            <Route path="/Login" element={<Login />} />
+            <Route path="/SubMenu2" element={<GuardedRoute {...defaultProtectedRouteProps} outlet={<SubMenu2 />} isAuthenticated={isAuthenticated} />} />
+            <Route path="/Login" element={<Login onSuccessfullLogin={successfullLoginHandler} />} />
             <Route path="*" element={<NoMatch />} />
           </Routes>
         </div>
