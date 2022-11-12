@@ -1,5 +1,7 @@
 import stylesLogin from './login.module.scss';
 import { useState } from 'react';
+import { useNavigate } from "react-router";
+import { useSessionContext } from '../../contexts/SessionContext';
 
 export interface Props {
     onSuccessfullLogin: () => void
@@ -7,6 +9,8 @@ export interface Props {
 
 export function Login(props: Props) {
     const [inputs, setInputs] = useState<any>({});
+    const navigate = useNavigate();
+    const [session, setSession] = useSessionContext();
 
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputs((values: any) => ({...values, [event.target.name]: event.target.value}));
@@ -16,6 +20,9 @@ export function Login(props: Props) {
         event.preventDefault();
         // TODO check login validation here
         props.onSuccessfullLogin();
+        // navigate('/SubMenu2');
+        setSession({...session, isAuthenticated: true});
+        navigate(session.redirectPath);
     }
     
     return (

@@ -7,6 +7,7 @@ import Footer from './components/Footer/footer';
 import GuardedRoute, { GuardedRouteProps } from './components/General/GuardedRoute/GuardedRoute';
 import Header from './components/Header/header';
 import Nav from './components/Navigator/navigator';
+import { useSessionContext } from './contexts/SessionContext';
 import CompanyReview from './pages/CompanyReview/CompanyReview';
 import DashBoard from './pages/Dashboard/Dashboard';
 import FormComponent from './pages/Form/Form';
@@ -22,6 +23,15 @@ interface MyProps {
 function App(props: MyProps) {
   const [toastShow, setToastShow] = useState<boolean>(false);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [sessionContext, updateSessionContext] = useSessionContext();
+
+  const setRedirectPath = (path: string) => {
+    updateSessionContext({...sessionContext, redirectPath: path});
+  }
+
+  if(!sessionContext.redirectPath) {
+    setRedirectPath('dashboard');
+  }
 
   const setShow = (isShow: boolean) => {
     setToastShow(false);
@@ -36,6 +46,8 @@ function App(props: MyProps) {
   const defaultProtectedRouteProps: Omit<GuardedRouteProps, 'outlet'> = {
     isAuthenticated: isAuthenticated,
     authenticationPath: '/login',
+    redirectPath: sessionContext.redirectPath,
+    setRedirectPath: setRedirectPath
   };
 
   const successfullLoginHandler = () => {
@@ -56,7 +68,7 @@ function App(props: MyProps) {
             <Route path="/Form" element={<FormComponent />} />
             <Route path="/companyReview/:companySymbol" element={<CompanyReview />} />
             <Route path="/SubMenu1" element={<SubMenu1 />} />
-            <Route path="/SubMenu2" element={<GuardedRoute {...defaultProtectedRouteProps} outlet={<SubMenu2 />} isAuthenticated={isAuthenticated} />} />
+            <Route path="/SubMenu2" element={<GuardedRoute {...defaultProtectedRouteProps} outlet={<SubMenu2 />} />} />
             <Route path="/Login" element={<Login onSuccessfullLogin={successfullLoginHandler} />} />
             <Route path="*" element={<NoMatch />} />
           </Routes>

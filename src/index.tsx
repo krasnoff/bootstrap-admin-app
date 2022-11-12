@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import configureStore from './Store/Store';
 import { Provider } from 'react-redux';
 import watcherSaga from './Store/Sagas/MarketSummary';
+import { SessionContextProvider } from './contexts/SessionContext';
 
 const store = configureStore();
 store.runSaga(watcherSaga);
@@ -15,7 +16,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store = { store }>
     <BrowserRouter>
-      <App />
+      <SessionContextProvider>
+        <App />
+      </SessionContextProvider>
     </BrowserRouter>
     </Provider>
   </React.StrictMode>,
