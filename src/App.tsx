@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Toast, ToastContainer } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
@@ -25,17 +25,19 @@ function App(props: MyProps) {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [sessionContext, updateSessionContext] = useSessionContext();
 
-  const setRedirectPath = (path: string) => {
+  const setRedirectPath = useCallback((path: string) => {
     updateSessionContext({...sessionContext, redirectPath: path});
-  }
-
-  if(!sessionContext.redirectPath) {
-    setRedirectPath('dashboard');
-  }
+  }, [sessionContext, updateSessionContext]);
 
   const setShow = (isShow: boolean) => {
     setToastShow(false);
   }
+
+  useEffect(() => {
+    if(!sessionContext.redirectPath) {
+      setRedirectPath('dashboard');
+    }
+  }, [sessionContext.redirectPath, setRedirectPath]);
   
   useEffect(() => {
     if (props.errorSummery) {

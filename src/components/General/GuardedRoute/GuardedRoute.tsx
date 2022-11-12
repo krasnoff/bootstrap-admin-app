@@ -14,10 +14,9 @@ export default function GuardedRoute(props: GuardedRouteProps) {
   
   useEffect(() => {
     if (!props.isAuthenticated) {
-      console.log('use effect: ', props.isAuthenticated);
       props.setRedirectPath(currentLocation.pathname);
     }
-  }, [props.isAuthenticated, props.setRedirectPath, currentLocation]);
+  }, [props.isAuthenticated, props.setRedirectPath, currentLocation, props]);
   
   if(props.isAuthenticated) {
       return props.outlet;
