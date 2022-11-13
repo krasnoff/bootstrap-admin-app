@@ -1,43 +1,13 @@
 import { useState } from 'react';
-import { MandatoryTypes } from '../../../Enums/MandatoryTypes';
-import { useFormUtilities } from '../../../hooks/useFormUtilities';
-import { FormFieldInteface } from '../../../Types/General/Formfield';
-import { MandatoryObj } from '../../../Types/General/ManDatoryObj';
-import { SimpleFormInteface } from '../../../Types/General/SimpleFormInterface';
-// import styles from './InputFile.module.scss';
+
 
 function SimpleForm() {
-    const {isValidIsraeliID, validateElement} = useFormUtilities();
-    
-    const [complexInputs, setComplexInputs] = useState<SimpleFormInteface>({
-        email: {fieldName: 'email',  mandatoryObjArr: [{mandatoryType: MandatoryTypes.required}, {mandatoryType: MandatoryTypes.Regex, mandatoryArg: new RegExp(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/)}]},
-        comments: {fieldName: 'comments', mandatoryObjArr: [{mandatoryType: MandatoryTypes.required}]},
-        chooseRadio: {fieldName: 'chooseRadio', mandatoryObjArr: [{mandatoryType: MandatoryTypes.required}]},
-        IDNumber: {fieldName: 'IDNumber', mandatoryObjArr: [{mandatoryType: MandatoryTypes.required}, {mandatoryType: MandatoryTypes.userDefined, mandatoryArg: isValidIsraeliID}]},
-        chooseColor: {fieldName: 'chooseColor'},
-        exampleDataList: {fieldName: 'datalistOptions', mandatoryObjArr: [{mandatoryType: MandatoryTypes.required}]},
-        checkThisbox: {fieldName: 'checkThisbox', mandatoryObjArr: [{mandatoryType: MandatoryTypes.required}]},
-        chooseNumber: {fieldName: 'chooseNumber', mandatoryObjArr: [{mandatoryType: MandatoryTypes.required}]},
-        exampleRange: {fieldName: 'exampleRange'}
-    });
-
     const [inputs, setInputs] = useState<any>({});
     const [isSubmit, setIsSubmit] = useState<boolean>(false);
     
     const handleSubmit = (event: any) => {
         event.preventDefault();
         setIsSubmit(true);
-        
-        Object.keys(complexInputs).forEach(key => {
-            const element = (complexInputs as any)[key] as FormFieldInteface;
-            if (element && element.mandatoryObjArr) {
-                if (element.mandatoryObjArr) {
-                    element.mandatoryObjArr.forEach(el => {
-                        el.isNotValid = validateElement(el, inputs[element.fieldName]);
-                    });
-                }
-            }
-        });
     }
 
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -48,16 +18,6 @@ function SimpleForm() {
         } else {
             setInputs((values: any) => ({...values, [event.target.name]: event.target.value}));
         }
-        
-
-        const simpleFormInteface = (complexInputs as any)[event.target.name];
-        if (simpleFormInteface && simpleFormInteface.mandatoryObjArr) {
-            simpleFormInteface.mandatoryObjArr.forEach((el: MandatoryObj) => {
-                el.isNotValid = validateElement(el, value);
-            })
-            
-        }        
-        setComplexInputs(complexInputs);
     }
 
     const NumbersOnly = (evt: any) => {
@@ -80,17 +40,17 @@ function SimpleForm() {
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">Email address</label>
                     <input type="email" className="form-control" name="email" id="email" placeholder="name@example.com" value={inputs.email || ""} onChange={changeHandler} />
-                    <div className="invalid-feedback" style={isSubmit && (complexInputs.email.mandatoryObjArr as Array<MandatoryObj>)[0].isNotValid ? divStyleBlock : divStyleNone}>
+                    <div className="invalid-feedback">
                         Mandatory field
                     </div>
-                    <div className="invalid-feedback" style={isSubmit && (complexInputs.email.mandatoryObjArr as Array<MandatoryObj>)[1].isNotValid ? divStyleBlock : divStyleNone}>
+                    <div className="invalid-feedback">
                         Email is not valid
                     </div>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="comments" className="form-label">Example textarea</label>
                     <textarea className="form-control" name="comments" id="comments" rows={3} value={inputs.comments || ""} onChange={changeHandler}></textarea>
-                    <div className="invalid-feedback" style={isSubmit && (complexInputs.comments.mandatoryObjArr as Array<MandatoryObj>)[0].isNotValid ? divStyleBlock : divStyleNone}>
+                    <div className="invalid-feedback">
                         Mandatory field
                     </div>
                 </div>
@@ -107,7 +67,7 @@ function SimpleForm() {
                             Default checked radio
                         </label>
                     </div>
-                    <div className="invalid-feedback" style={isSubmit && (complexInputs.chooseRadio.mandatoryObjArr as Array<MandatoryObj>)[0].isNotValid ? divStyleBlock : divStyleNone}>
+                    <div className="invalid-feedback">
                         Mandatory field
                     </div>
                 </div>
@@ -120,10 +80,10 @@ function SimpleForm() {
                 <div className="mb-3">
                     <label htmlFor="IDNumber" className="form-label">IDNumber</label>
                     <input type="text" className="form-control" name="IDNumber" id="IDNumber" placeholder="IDNumber" aria-label="IDNumber" value={inputs.IDNumber || ""} onChange={changeHandler} maxLength={9} onKeyDown={NumbersOnly} />
-                    <div className="invalid-feedback" style={isSubmit && (complexInputs.IDNumber.mandatoryObjArr as Array<MandatoryObj>)[0].isNotValid ? divStyleBlock : divStyleNone}>
+                    <div className="invalid-feedback">
                         Mandatory field
                     </div>
-                    <div className="invalid-feedback" style={isSubmit && (complexInputs.IDNumber.mandatoryObjArr as Array<MandatoryObj>)[1].isNotValid ? divStyleBlock : divStyleNone}>
+                    <div className="invalid-feedback">
                         ID is not valid
                     </div>
                 </div>
@@ -141,7 +101,7 @@ function SimpleForm() {
                         <option value="Los Angeles"/>
                         <option value="Chicago"/>
                     </datalist>
-                    <div className="invalid-feedback" style={isSubmit && (complexInputs.exampleDataList.mandatoryObjArr as Array<MandatoryObj>)[0].isNotValid ? divStyleBlock : divStyleNone}>
+                    <div className="invalid-feedback">
                         Mandatory field
                     </div>
                 </div>
@@ -153,7 +113,7 @@ function SimpleForm() {
                         <option value="2">Two</option>
                         <option value="3">Three</option>
                     </select>
-                    <div className="invalid-feedback" style={isSubmit && (complexInputs.chooseNumber.mandatoryObjArr as Array<MandatoryObj>)[0].isNotValid ? divStyleBlock : divStyleNone}>
+                    <div className="invalid-feedback">
                         Mandatory field
                     </div>
                 </div>
@@ -164,7 +124,7 @@ function SimpleForm() {
                             Default checkbox
                         </label>
                     </div>
-                    <div className="invalid-feedback" style={isSubmit && (complexInputs.checkThisbox.mandatoryObjArr as Array<MandatoryObj>)[0].isNotValid ? divStyleBlock : divStyleNone}>
+                    <div className="invalid-feedback">
                         Mandatory field
                     </div>
                 </div>
