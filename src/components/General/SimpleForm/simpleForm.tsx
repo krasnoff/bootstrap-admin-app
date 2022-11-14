@@ -1,5 +1,22 @@
 import { useState } from 'react';
 
+enum chooseNumberEnum {
+    One = 1,
+    Two = 2,
+    Three = 3
+}
+
+interface IFormInput {
+    email: string;
+    comments: string;
+    chooseRadio: 1 | 2;
+    exampleRange: number;
+    IDNumber: string;
+    chooseColor: string;
+    exampleDataList: string;
+    chooseNumber: 1 | 2 | 3;
+    checkThisbox: boolean;
+}
 
 function SimpleForm() {
     const [inputs, setInputs] = useState<any>({});
