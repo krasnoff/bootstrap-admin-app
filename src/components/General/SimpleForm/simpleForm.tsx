@@ -1,10 +1,6 @@
-import { useState } from 'react';
-
-enum chooseNumberEnum {
-    One = 1,
-    Two = 2,
-    Three = 3
-}
+import { useForm, SubmitHandler } from "react-hook-form";
+import { useCheckIDNum } from "../../../hooks/useCheckIDNum";
+import styles from './simpleForm.module.scss'; 
 
 interface IFormInput {
     email: string;
@@ -19,98 +15,64 @@ interface IFormInput {
 }
 
 function SimpleForm() {
-    const [inputs, setInputs] = useState<any>({});
-    const [isSubmit, setIsSubmit] = useState<boolean>(false);
+    const { idValidate } = useCheckIDNum();
+    const { register, formState: { errors }, handleSubmit } = useForm<IFormInput>();
+    const onSubmit: SubmitHandler<IFormInput> = data => console.log(data);
     
-    const handleSubmit = (event: any) => {
-        event.preventDefault();
-        setIsSubmit(true);
-    }
-
-    const changeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        let value = event.target.value;
-        if (event.target instanceof HTMLInputElement && event.target.type === 'checkbox') {
-            setInputs((values: any) => ({...values, [event.target.name]: (event.target as any).checked}));
-            value = (event.target as any).checked;
-        } else {
-            setInputs((values: any) => ({...values, [event.target.name]: event.target.value}));
-        }
-    }
-
     const NumbersOnly = (evt: any) => {
         if (isNaN(evt.key) && (evt.key !== "Enter" && evt.key !== "Delete" && evt.key !== "Backspace" && evt.key !== "Tab" && evt.key !== "ArrowLeft" && evt.key !== "ArrowRight")) {
             evt.preventDefault();
         }
     }
 
-    const divStyleBlock = {
-        display: 'block'
-    };
-
-    const divStyleNone = {
-        display: 'none'
-    };
-    
     return (
-        <form className="row" onSubmit={(event) => handleSubmit(event)}>
+        <form className="row" onSubmit={handleSubmit(onSubmit)}>
             <div className="col-6">
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">Email address</label>
-                    <input type="email" className="form-control" name="email" id="email" placeholder="name@example.com" value={inputs.email || ""} onChange={changeHandler} />
-                    <div className="invalid-feedback">
-                        Mandatory field
-                    </div>
-                    <div className="invalid-feedback">
-                        Email is not valid
-                    </div>
+                    <input type="text" className="form-control" placeholder="name@example.com" {...register("email", { required: true, pattern: /^[\w-.]+@([\w-]+.)+[\w-]{2,4}$/i })} id="email"/>
+                    {errors.email?.type === 'required' && <div className={["invalid-feedback", styles.active].join(' ')}>Mandatory field</div>}
+                    {errors.email?.type === 'pattern' && <div className={["invalid-feedback", styles.active].join(' ')}>Email is not valid</div>}
                 </div>
                 <div className="mb-3">
                     <label htmlFor="comments" className="form-label">Example textarea</label>
-                    <textarea className="form-control" name="comments" id="comments" rows={3} value={inputs.comments || ""} onChange={changeHandler}></textarea>
-                    <div className="invalid-feedback">
-                        Mandatory field
-                    </div>
+                    <textarea className="form-control" rows={3} {...register("comments", { required: true })} id="comments"></textarea>
+                    {errors.comments?.type === 'required' && <div className={["invalid-feedback", styles.active].join(' ')}>Mandatory field</div>}
                 </div>
                 <div className="mb-3">
                     <div className="form-check">
-                        <input className="form-check-input" type="radio" name="chooseRadio" id="chooseRadio1" onChange={changeHandler} value={1} />
+                        <input className="form-check-input" type="radio" id="chooseRadio1" {...register("chooseRadio", { required: true })} />
                         <label className="form-check-label" htmlFor="chooseRadio1">
                             Default radio
                         </label>
                     </div>
                     <div className="form-check">
-                        <input className="form-check-input" type="radio" name="chooseRadio" id="chooseRadio2" onChange={changeHandler} value={2} />
+                        <input className="form-check-input" type="radio" id="chooseRadio2" {...register("chooseRadio", { required: true })}/>
                         <label className="form-check-label" htmlFor="chooseRadio2">
                             Default checked radio
                         </label>
                     </div>
-                    <div className="invalid-feedback">
-                        Mandatory field
-                    </div>
+                    {errors.chooseRadio?.type === 'required' && <div className={["invalid-feedback", styles.active].join(' ')}>Mandatory field</div>}
                 </div>
                 <div className="mb-3">
                     <label htmlFor="exampleRange" className="form-label">Example range</label>
-                    <input type="range" className="form-range" id="exampleRange" name="exampleRange" value={inputs.exampleRange || ""} onChange={changeHandler} />
+                    <input type="range" className="form-range" id="exampleRange" {...register("exampleRange")} />
                 </div>
             </div>
             <div className="col-6">
                 <div className="mb-3">
                     <label htmlFor="IDNumber" className="form-label">IDNumber</label>
-                    <input type="text" className="form-control" name="IDNumber" id="IDNumber" placeholder="IDNumber" aria-label="IDNumber" value={inputs.IDNumber || ""} onChange={changeHandler} maxLength={9} onKeyDown={NumbersOnly} />
-                    <div className="invalid-feedback">
-                        Mandatory field
-                    </div>
-                    <div className="invalid-feedback">
-                        ID is not valid
-                    </div>
+                    <input type="text" className="form-control" id="IDNumber" placeholder="IDNumber" {...register("IDNumber", { required: true, validate: idValidate })} onKeyDown={NumbersOnly} maxLength={9} />
+                    {errors.IDNumber?.type === 'required' && <div className={["invalid-feedback", styles.active].join(' ')}>Mandatory field</div>}
+                    {errors.IDNumber?.type === 'validate' && <div className={["invalid-feedback", styles.active].join(' ')}>ID is not valid</div>}
                 </div>
                 <div className="mb-3">
                     <label htmlFor="chooseColor" className="form-label">Choose color</label>
-                    <input type="color" className="form-control form-control-color" name="chooseColor" id="chooseColor" title="Choose your color" value={inputs.chooseColor || "#000000"} onChange={changeHandler} />
+                    <input type="color" className="form-control form-control-color" id="chooseColor" title="Choose your color" {...register("chooseColor")} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="exampleDataList" className="form-label">Datalist example</label>
-                    <input className="form-control" list="datalistOptions" name="exampleDataList" id="exampleDataList" placeholder="Type to search..." value={inputs.exampleDataList || ""} onChange={changeHandler} />
+                    <input className="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." {...register("exampleDataList", { required: true })} />
                     <datalist id="datalistOptions">
                         <option value="San Francisco"/>
                         <option value="New York"/>
@@ -118,32 +80,26 @@ function SimpleForm() {
                         <option value="Los Angeles"/>
                         <option value="Chicago"/>
                     </datalist>
-                    <div className="invalid-feedback">
-                        Mandatory field
-                    </div>
+                    {errors.exampleDataList?.type === 'required' && <div className={["invalid-feedback", styles.active].join(' ')}>Mandatory field</div>}
                 </div>
                 <div className="mb-3">
                     <label htmlFor="chooseNumber" className="form-label">Choose number</label>
-                    <select className="form-select" aria-label="Default select example" name="chooseNumber" id="chooseNumber" value={inputs.chooseNumber || ""} onChange={changeHandler}>
+                    <select className="form-select" aria-label="Default select example" id="chooseNumber" {...register("chooseNumber", { required: true })}>
                         <option value="">Open this select menu</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>
                     </select>
-                    <div className="invalid-feedback">
-                        Mandatory field
-                    </div>
+                    {errors.chooseNumber?.type === 'required' && <div className={["invalid-feedback", styles.active].join(' ')}>Mandatory field</div>}
                 </div>
                 <div className="mb-3">
                     <div className="form-check">
-                        <input className="form-check-input" type="checkbox" name="checkThisbox" id="checkThisbox" checked={inputs.checkThisbox || ""} onChange={changeHandler} />
+                        <input className="form-check-input" type="checkbox" id="checkThisbox" {...register("checkThisbox", { required: true })} />
                         <label className="form-check-label" htmlFor="checkThisbox">
                             Default checkbox
                         </label>
                     </div>
-                    <div className="invalid-feedback">
-                        Mandatory field
-                    </div>
+                    {errors.checkThisbox?.type === 'required' && <div className={["invalid-feedback", styles.active].join(' ')}>Mandatory field</div>}
                 </div>
             </div>
             <div className="col-12">
