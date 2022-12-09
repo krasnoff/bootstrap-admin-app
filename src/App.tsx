@@ -15,6 +15,7 @@ import { Login } from './pages/Login/Login';
 import NoMatch from './pages/NoMatch/NoMatch';
 import SubMenu1 from './pages/SubMenu1/SubMenu1';
 import SubMenu2 from './pages/SubMenu2/SubMenu2';
+import { disconnectSocket, initiateSocketConnection, subscribeToChat } from './services/socketio.service';
 
 interface MyProps {
   errorSummery?: any
@@ -33,6 +34,8 @@ function App(props: MyProps) {
     setToastShow(false);
   }
 
+  const [randomSentence, setRandomSentence] = useState<string>('')
+
   useEffect(() => {
     if(!sessionContext.redirectPath) {
       setRedirectPath('dashboard');
@@ -44,6 +47,26 @@ function App(props: MyProps) {
       setToastShow(true) 
     }    
   }, [props.errorSummery]);
+
+  // connecting socket
+  useEffect(() => {
+    initiateSocketConnection();
+
+    // listen to broadcast
+    subscribeToChat((err: any, data: any) => {
+      setRandomSentence(data);
+    });
+
+    return () => {
+      disconnectSocket();
+    }
+  }, []);
+
+  // activate toast
+  useEffect(() => {
+    //console.log('from session', randomSentence);
+    setToastShow(true) 
+  }, [randomSentence]);
 
   const defaultProtectedRouteProps: Omit<GuardedRouteProps, 'outlet'> = {
     isAuthenticated: isAuthenticated,
@@ -78,17 +101,17 @@ function App(props: MyProps) {
         <Footer></Footer>
       </div>
       <ToastContainer className="p-3" position="bottom-end">
-      <Toast onClose={() => setShow(false)} show={toastShow} delay={3000} bg="danger" autohide>
+      <Toast onClose={() => setShow(false)} show={toastShow} delay={5000} bg="primary" autohide>
           <Toast.Header>
             <img
               src="holder.js/20x20?text=%20"
               className="rounded me-2"
               alt=""
             />
-            <strong className="me-auto">Error Message</strong>
+            <strong className="me-auto">Notification Message</strong>
             <small>&nbsp;</small>
           </Toast.Header>
-          <Toast.Body>Error {props.errorSummery}. Please call administrator</Toast.Body>
+          <Toast.Body>{randomSentence}</Toast.Body>
       </Toast>
       </ToastContainer>
     </div>
