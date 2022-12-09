@@ -65,7 +65,9 @@ function App(props: MyProps) {
   // activate toast
   useEffect(() => {
     //console.log('from session', randomSentence);
-    setToastShow(true) 
+    if (randomSentence.length > 0) {
+      setToastShow(true);
+    }
   }, [randomSentence]);
 
   const defaultProtectedRouteProps: Omit<GuardedRouteProps, 'outlet'> = {
