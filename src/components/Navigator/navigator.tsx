@@ -47,6 +47,9 @@ function Nav() {
             },{
                 title: 'Guarded page',
                 url: 'SubMenu2'
+            },{
+                title: 'React hooks demo',
+                url: 'SubMenu3'
             }]
         },
         menuType: MenuTypes.MenuItem

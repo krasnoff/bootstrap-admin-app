@@ -15,6 +15,7 @@ import { Login } from './pages/Login/Login';
 import NoMatch from './pages/NoMatch/NoMatch';
 import SubMenu1 from './pages/SubMenu1/SubMenu1';
 import SubMenu2 from './pages/SubMenu2/SubMenu2';
+import SubMenu3 from './pages/SubMenu3/SubMenu3';
 import { disconnectSocket, initiateSocketConnection, subscribeToChat } from './services/socketio.service';
 
 interface MyProps {
@@ -96,6 +97,7 @@ function App(props: MyProps) {
             <Route path="/companyReview/:companySymbol" element={<CompanyReview />} />
             <Route path="/SubMenu1" element={<SubMenu1 />} />
             <Route path="/SubMenu2" element={<GuardedRoute {...defaultProtectedRouteProps} outlet={<SubMenu2 />} />} />
+            <Route path="/SubMenu3" element={<SubMenu3 />} />
             <Route path="/Login" element={<Login onSuccessfullLogin={successfullLoginHandler} />} />
             <Route path="*" element={<NoMatch />} />
           </Routes>
