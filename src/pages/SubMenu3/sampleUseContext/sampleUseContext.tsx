@@ -9,6 +9,7 @@ export default function SampleUseContext() {
     <ThemeContext.Provider value={theme}>
       <Form>
         <div>Example of the useContext hook</div>
+        <div>article about useContext: <a href="https://beta.reactjs.org/reference/react/useContext" rel="noreferrer" target="_blank">https://beta.reactjs.org/reference/react/useContext</a></div>
         <label>
           <input
             type="checkbox"
