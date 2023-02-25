@@ -4,6 +4,7 @@ import stylesMargins from '../../css/margins.module.scss';
 import ComponentWrapper from '../../components/General/ComponentWrapper/ComponentWrapper';
 import LifeCicle from './lifeCicle/lifeCicle';
 import SampleUseContext from './sampleUseContext/sampleUseContext';
+import OpenAI from './openAI/openAI';
 
 function SubMenu3() {
     return (
@@ -14,6 +15,9 @@ function SubMenu3() {
         </ComponentWrapper>
         <ComponentWrapper title='useContext'>
             <SampleUseContext></SampleUseContext>
+        </ComponentWrapper>
+        <ComponentWrapper title='openAI'>
+            <OpenAI></OpenAI>
         </ComponentWrapper>
       </div>
     );
