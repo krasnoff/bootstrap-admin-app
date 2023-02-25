@@ -1,11 +1,28 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 
-const ThemeContext = createContext(null);
+const ThemeContext = createContext('light');
 
 export default function SampleUseContext() {
-    return (
+  const [theme, setTheme] = useState('light');
+  
+  return (
+    <ThemeContext.Provider value={theme}>
+      <Form>
         <div>Example of the useContext hook</div>
-    );
+        <label>
+          <input
+            type="checkbox"
+            checked={theme === 'dark'}
+            onChange={(e) => {
+              setTheme(e.target.checked ? 'dark' : 'light')
+            }}
+          />
+          Use dark mode
+        </label>
+      </Form>
+    </ThemeContext.Provider>
+    
+  );
 }
 
 type Props = {
@@ -15,10 +32,13 @@ type Props = {
 
 function Form({ children }: Props) {
     return (
-      <Panel title="Welcome">
-        <Button>Sign up</Button>
-        <Button>Log in</Button>
-      </Panel>
+      <>
+        <Panel title="Welcome">
+          <Button>Sign up</Button>
+          <Button>Log in</Button>
+        </Panel>
+        {children}
+      </>
     );
 }
 
