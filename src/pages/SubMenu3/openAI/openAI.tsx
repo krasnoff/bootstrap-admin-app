@@ -32,20 +32,24 @@ export default function OpenAI() {
     return (
         <div className="main">
             <div className="w-2/4 mx-auto">
-                <textarea
-                    value={prompt}
-                    onChange={(e) => setPrompt(e.target.value)}
-                    placeholder="write a prompt..."
-                    className="textarea"
-                ></textarea>
+                <div>
+                    <textarea
+                        value={prompt}
+                        onChange={(e) => setPrompt(e.target.value)}
+                        placeholder="write a prompt..."
+                        className="form-control"
+                    ></textarea>
+                </div>
 
-                <button
-                    onClick={handleClick}
-                    disabled={loading || prompt.length === 0}
-                    className="btn"
-                >
-                    {loading ? 'generating' : 'generate'}
-                </button>
+                <div className="mt-2"> 
+                    <button
+                        onClick={handleClick}
+                        disabled={loading || prompt.length === 0}
+                        className="btn btn-primary"
+                    >
+                        {loading ? 'generating' : 'generate'}
+                    </button>
+                </div>
 
                 <pre className="result">{result}</pre>
             </div>
