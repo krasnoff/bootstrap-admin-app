@@ -4,13 +4,13 @@ import { Data } from "./data";
 export default function SampleUseCallback() {
   const [data, setData] = useState<Data>()
   
-  const handleSubmit = useCallback(() => {
-    fetch('https://reqres.in/api/users?page=2', {}).then((data) => {
-      setData(data as unknown as Data);
-      console.log('useCallback')
-    })
-    
+  const handleSubmit = useCallback(async () => {
+    const data = await fetch('https://reqres.in/api/users?page=2', {});
+    setData(data as unknown as Data);
   }, [data]);
+
+  // TODO call REST on loading by useEffect 
+  // set another state see rendering.
   
   return (
     <div>
