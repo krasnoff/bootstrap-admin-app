@@ -5,6 +5,7 @@ import ComponentWrapper from '../../components/General/ComponentWrapper/Componen
 import LifeCicle from './lifeCicle/lifeCicle';
 import SampleUseContext from './sampleUseContext/sampleUseContext';
 import OpenAI from './openAI/openAI';
+import SampleUseCallback from './useCalback/sampleUseContext';
 
 function SubMenu3() {
     return (
@@ -18,6 +19,9 @@ function SubMenu3() {
         </ComponentWrapper>
         <ComponentWrapper title='openAI'>
             <OpenAI></OpenAI>
+        </ComponentWrapper>
+        <ComponentWrapper title='useCallback'>
+            <SampleUseCallback></SampleUseCallback>
         </ComponentWrapper>
       </div>
     );
