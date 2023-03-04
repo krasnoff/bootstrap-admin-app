@@ -6,8 +6,16 @@ import LifeCicle from './lifeCicle/lifeCicle';
 import SampleUseContext from './sampleUseContext/sampleUseContext';
 import OpenAI from './openAI/openAI';
 import SampleUseCallback from './useCalback/sampleUseContext';
+import UserPostsIndex from './useCalback/UserPostIndex';
+import { useState } from 'react';
 
 function SubMenu3() {
+    const [signedIn, setSignedIn] = useState<boolean>(false)
+
+    const buttonHandler = () => {
+      setSignedIn(!signedIn);
+    }
+
     return (
       <div className={styles.containerFluid}>
         <h1 className={[stylesText.h3, stylesMargins.mb0, stylesText.textGray800].join(' ')}>Sub Menu 3</h1>
@@ -21,7 +29,8 @@ function SubMenu3() {
             <OpenAI></OpenAI>
         </ComponentWrapper>
         <ComponentWrapper title='useCallback'>
-            <SampleUseCallback></SampleUseCallback>
+            <button onClick={() => buttonHandler()}>signin</button>
+            <UserPostsIndex signedIn={signedIn}></UserPostsIndex>
         </ComponentWrapper>
       </div>
     );

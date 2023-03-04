@@ -13,15 +13,15 @@ const store = configureStore();
 store.runSaga(watcherSaga);
 
 ReactDOM.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store = { store }>
     <BrowserRouter>
       <SessionContextProvider>
         <App />
       </SessionContextProvider>
     </BrowserRouter>
-    </Provider>
-  </React.StrictMode>,
+    </Provider>,
+  // </React.StrictMode>,
   document.getElementById('root')
 );
 
