@@ -7,23 +7,19 @@ interface Props {
 }
 
 const UserPostsIndex = (props: Props) => {
-  const [userPosts, setUserPosts] = useState<Data>();
+  const [userPosts, setUserPosts] = useState<Array<Datum>>();
 
   const fetchUserPosts = async () => {
     const data = await fetch('https://reqres.in/api/users?page=2', {});
     const parsedData = await data.json();
-    setUserPosts(parsedData as unknown as Data);
+    setUserPosts(parsedData.data);
     //return parsedData as unknown as Data;
   }
 
   const deletePost = (e: any) => {
     const { postId } = e.currentTarget.dataset;
-    const remainingPosts = userPosts?.data.filter(post => post.id !== parseInt(postId));
-    const newUserPosts = userPosts;
-    if (newUserPosts !== undefined) {
-        newUserPosts.data = remainingPosts!;
-    }
-    setUserPosts(newUserPosts as unknown as  Data);
+    const remainingPosts = userPosts?.filter(post => post.id !== parseInt(postId));
+    setUserPosts(remainingPosts);
   };
 
   useEffect(() => {
@@ -41,7 +37,7 @@ const UserPostsIndex = (props: Props) => {
           (
             <div className="px-1">
               {
-                <UserPostsList userPosts={userPosts.data}
+                <UserPostsList userPosts={userPosts}
                   deletePost={deletePost}
                 />
               }
