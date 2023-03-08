@@ -5,9 +5,8 @@ import ComponentWrapper from '../../components/General/ComponentWrapper/Componen
 import LifeCicle from './lifeCicle/lifeCicle';
 import SampleUseContext from './sampleUseContext/sampleUseContext';
 import OpenAI from './openAI/openAI';
-import SampleUseCallback from './useCalback/sampleUseContext';
-import UserPostsIndex from './useCalback/UserPostIndex';
 import { useState } from 'react';
+import TodoWrapper from './useCalback/TodoWrapper';
 
 function SubMenu3() {
     const [signedIn, setSignedIn] = useState<boolean>(false)
@@ -30,7 +29,7 @@ function SubMenu3() {
         </ComponentWrapper>
         <ComponentWrapper title='useCallback'>
             <button onClick={() => buttonHandler()}>signin</button>
-            <UserPostsIndex signedIn={signedIn}></UserPostsIndex>
+            <TodoWrapper></TodoWrapper>
         </ComponentWrapper>
       </div>
     );

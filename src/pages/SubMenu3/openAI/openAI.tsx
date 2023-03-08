@@ -1,7 +1,7 @@
 import { Configuration } from 'openai';
 import { OpenAIApi } from 'openai/dist/api';
 import { useState } from 'react';
-import styles from '../openAI.module.scss';
+// import styles from '../openAI.module.scss';
 
 export default function OpenAI() {
     const configuration = new Configuration({
