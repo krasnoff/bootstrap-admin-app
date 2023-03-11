@@ -7,6 +7,7 @@ import SampleUseContext from './sampleUseContext/sampleUseContext';
 import OpenAI from './openAI/openAI';
 import { useState } from 'react';
 import TodoWrapper from './useCalback/TodoWrapper';
+import UseMemoWrapper from './useMemo/useMemoSample';
 
 function SubMenu3() {
     const [signedIn, setSignedIn] = useState<boolean>(false)
@@ -30,6 +31,9 @@ function SubMenu3() {
         <ComponentWrapper title='useCallback'>
             <button onClick={() => buttonHandler()}>signin</button>
             <TodoWrapper></TodoWrapper>
+        </ComponentWrapper>
+        <ComponentWrapper title='useMemo'>
+            <UseMemoWrapper></UseMemoWrapper>
         </ComponentWrapper>
       </div>
     );
